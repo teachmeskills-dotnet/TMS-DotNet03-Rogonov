@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AllQueez.Common.Constants
+﻿namespace AllQueez.Common.Constants
 {
     /// <summary>
     /// Scheme constants.
