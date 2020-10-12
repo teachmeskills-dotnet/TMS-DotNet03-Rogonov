@@ -25,11 +25,19 @@ namespace AllQueez.DAL.Context
         /// </summary>
         public DbSet<Theme> Themes { get; set; }
 
+        /// <summary>
+        /// Games.
+        /// </summary>
+        public DbSet<Game> Games { get; set; }
+
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder = modelBuilder ?? throw new ArgumentNullException(nameof(modelBuilder));
 
             modelBuilder.ApplyConfiguration(new ThemeConfiguration());
+            modelBuilder.ApplyConfiguration(new GameConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

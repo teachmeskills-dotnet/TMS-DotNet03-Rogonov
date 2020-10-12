@@ -12,5 +12,10 @@ namespace AllQueez.DAL.Entities
         /// Navigation to Themes.
         /// </summary>
         public ICollection<Theme> Themes { get; set; }
+
+        /// <summary>
+        /// Navigation to Games.
+        /// </summary>
+        public ICollection<Game> Games { get; set; }
     }
 }

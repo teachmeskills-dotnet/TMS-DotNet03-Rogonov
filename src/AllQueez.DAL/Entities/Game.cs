@@ -1,12 +1,14 @@
 ﻿using AllQueez.Common.Interfaces;
+using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace AllQueez.DAL.Entities
 {
     /// <summary>
-    /// Themes.
+    /// Games.
     /// </summary>
-    public class Theme : IHasDbIdentity, IHasUserIdentity
+    public class Game : IHasDbIdentity, IHasUserIdentity
     {
         /// <inheritdoc/>
         public int Id { get; set; }
@@ -15,18 +17,28 @@ namespace AllQueez.DAL.Entities
         public string UserId { get; set; }
 
         /// <summary>
+        /// Theme Id.
+        /// </summary>
+        public int ThemeId { get; set; }
+
+        /// <summary>
         /// Navigation to User.
         /// </summary>
         public User User { get; set; }
 
         /// <summary>
-        /// Navigation to Game.
+        /// Navigation to Theme.
         /// </summary>
-        public ICollection<Game> Games { get; set; }
+        public Theme Theme { get; set; }
 
         /// <summary>
-        /// Theme name.
+        /// Game title.
         /// </summary>
-        public string Name { get; set; }
+        public string Title { get; set; }
+
+        /// <summary>
+        /// Game date.
+        /// </summary>
+        public DateTime? Date { get; set; }
     }
 }
