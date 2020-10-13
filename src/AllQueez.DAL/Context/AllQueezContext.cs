@@ -30,7 +30,20 @@ namespace AllQueez.DAL.Context
         /// </summary>
         public DbSet<Game> Games { get; set; }
 
+        /// <summary>
+        /// Rounds.
+        /// </summary>
+        public DbSet<Round> Rounds { get; set; }
 
+        /// <summary>
+        /// Questions.
+        /// </summary>
+        public DbSet<Question> Questions { get; set; }
+
+        /// <summary>
+        /// Round questions.
+        /// </summary>
+        public DbSet<RoundQuestion> RoundQuestions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,6 +51,9 @@ namespace AllQueez.DAL.Context
 
             modelBuilder.ApplyConfiguration(new ThemeConfiguration());
             modelBuilder.ApplyConfiguration(new GameConfiguration());
+            modelBuilder.ApplyConfiguration(new RoundConfiguration());
+            modelBuilder.ApplyConfiguration(new QuestionConfiguration());
+            modelBuilder.ApplyConfiguration(new RoundQuestionConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

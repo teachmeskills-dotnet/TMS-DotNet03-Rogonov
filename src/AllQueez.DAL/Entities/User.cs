@@ -17,5 +17,15 @@ namespace AllQueez.DAL.Entities
         /// Navigation to Games.
         /// </summary>
         public ICollection<Game> Games { get; set; }
+
+        /// <summary>
+        /// Navigation to Rounds.
+        /// </summary>
+        public ICollection<Round> Rounds { get; set; }
+
+        /// <summary>
+        /// Navigation to Questions.
+        /// </summary>
+        public ICollection<Question> Questions { get; set; }
     }
 }

@@ -24,5 +24,10 @@
         /// Max length for string field.
         /// </summary>
         public const int SqlMaxLengthLong = 255;
+
+        /// <summary>
+        /// Max length for textarea.
+        /// </summary>
+        public const int SqlMaxLengthTextarea = 511;
     }
 }

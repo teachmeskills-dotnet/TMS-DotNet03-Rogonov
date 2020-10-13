@@ -16,7 +16,7 @@ namespace AllQueez.DAL.Configurations
         {
             builder = builder ?? throw new ArgumentNullException(nameof(builder));
 
-            builder.ToTable(TableConstants.Games, SchemeConstants.Game)
+            builder.ToTable(TableConstants.Games, SchemaConstants.Game)
                 .HasKey(game => game.Id);
 
             builder.Property(game => game.Title)

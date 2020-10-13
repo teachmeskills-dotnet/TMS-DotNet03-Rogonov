@@ -16,7 +16,7 @@ namespace AllQueez.DAL.Configurations
         {
             builder = builder ?? throw new ArgumentNullException(nameof(builder));
 
-            builder.ToTable(TableConstants.Themes, SchemeConstants.Theme)
+            builder.ToTable(TableConstants.Themes, SchemaConstants.Theme)
                 .HasKey(theme => theme.Id);
 
             builder.Property(theme => theme.Name)

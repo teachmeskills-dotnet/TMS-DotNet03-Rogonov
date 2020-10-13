@@ -1,14 +1,12 @@
 ﻿using AllQueez.Common.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace AllQueez.DAL.Entities
 {
     /// <summary>
-    /// Games.
+    /// Rounds.
     /// </summary>
-    public class Game : IHasDbIdentity, IHasUserIdentity
+    public class Round : IHasDbIdentity, IHasUserIdentity
     {
         /// <inheritdoc/>
         public int Id { get; set; }
@@ -17,33 +15,33 @@ namespace AllQueez.DAL.Entities
         public string UserId { get; set; }
 
         /// <summary>
-        /// Theme Id.
-        /// </summary>
-        public int ThemeId { get; set; }
-
-        /// <summary>
         /// Navigation to User.
         /// </summary>
         public User User { get; set; }
 
         /// <summary>
-        /// Navigation to Theme.
+        /// Game id.
         /// </summary>
-        public Theme Theme { get; set; }
+        public int GameId { get; set; }
 
         /// <summary>
-        /// Navigation to Round.
+        /// Navigation to game.
         /// </summary>
-        public ICollection<Round> Rounds { get; set; }
+        public Game Game { get; set; }
 
         /// <summary>
-        /// Game title.
+        /// Round title.
         /// </summary>
         public string Title { get; set; }
 
         /// <summary>
-        /// Game date.
+        /// Round type.
         /// </summary>
-        public DateTime? Date { get; set; }
+        public string Type { get; set; }
+
+        /// <summary>
+        /// Navigation to Round questions.
+        /// </summary>
+        public ICollection<RoundQuestion> RoundQuestions { get; set; }
     }
 }
