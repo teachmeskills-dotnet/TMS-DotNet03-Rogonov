@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace AllQueez.DAL.Entities
 {
@@ -10,6 +8,24 @@ namespace AllQueez.DAL.Entities
     /// </summary>
     public class User : IdentityUser
     {
+        /// <summary>
+        /// Navigation to Themes.
+        /// </summary>
+        public ICollection<Theme> Themes { get; set; }
 
+        /// <summary>
+        /// Navigation to Games.
+        /// </summary>
+        public ICollection<Game> Games { get; set; }
+
+        /// <summary>
+        /// Navigation to Rounds.
+        /// </summary>
+        public ICollection<Round> Rounds { get; set; }
+
+        /// <summary>
+        /// Navigation to Questions.
+        /// </summary>
+        public ICollection<Question> Questions { get; set; }
     }
 }

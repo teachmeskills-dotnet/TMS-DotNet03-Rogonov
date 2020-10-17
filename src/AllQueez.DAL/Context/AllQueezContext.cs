@@ -1,9 +1,8 @@
-﻿using AllQueez.DAL.Entities;
+﻿using AllQueez.DAL.Configurations;
+using AllQueez.DAL.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AllQueez.DAL.Context
 {
@@ -19,6 +18,44 @@ namespace AllQueez.DAL.Context
         public AllQueezContext(DbContextOptions<AllQueezContext> options)
             : base(options)
         {
+        }
+
+        /// <summary>
+        /// Themes.
+        /// </summary>
+        public DbSet<Theme> Themes { get; set; }
+
+        /// <summary>
+        /// Games.
+        /// </summary>
+        public DbSet<Game> Games { get; set; }
+
+        /// <summary>
+        /// Rounds.
+        /// </summary>
+        public DbSet<Round> Rounds { get; set; }
+
+        /// <summary>
+        /// Questions.
+        /// </summary>
+        public DbSet<Question> Questions { get; set; }
+
+        /// <summary>
+        /// Round questions.
+        /// </summary>
+        public DbSet<RoundQuestion> RoundQuestions { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder = modelBuilder ?? throw new ArgumentNullException(nameof(modelBuilder));
+
+            modelBuilder.ApplyConfiguration(new ThemeConfiguration());
+            modelBuilder.ApplyConfiguration(new GameConfiguration());
+            modelBuilder.ApplyConfiguration(new RoundConfiguration());
+            modelBuilder.ApplyConfiguration(new QuestionConfiguration());
+            modelBuilder.ApplyConfiguration(new RoundQuestionConfiguration());
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

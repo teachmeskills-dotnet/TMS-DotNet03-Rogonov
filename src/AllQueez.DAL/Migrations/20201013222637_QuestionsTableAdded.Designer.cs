@@ -4,14 +4,16 @@ using AllQueez.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AllQueez.DAL.Migrations
 {
     [DbContext(typeof(AllQueezContext))]
-    partial class AllQueezContextModelSnapshot : ModelSnapshot
+    [Migration("20201013222637_QuestionsTableAdded")]
+    partial class QuestionsTableAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -123,28 +125,6 @@ namespace AllQueez.DAL.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Rounds","round");
-                });
-
-            modelBuilder.Entity("AllQueez.DAL.Entities.RoundQuestion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoundId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("QuestionId");
-
-                    b.HasIndex("RoundId");
-
-                    b.ToTable("RoundQuestions","roundQuestion");
                 });
 
             modelBuilder.Entity("AllQueez.DAL.Entities.Theme", b =>
@@ -399,21 +379,6 @@ namespace AllQueez.DAL.Migrations
                         .WithMany("Rounds")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("AllQueez.DAL.Entities.RoundQuestion", b =>
-                {
-                    b.HasOne("AllQueez.DAL.Entities.Question", "Question")
-                        .WithMany("RoundQuestions")
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("AllQueez.DAL.Entities.Round", "Round")
-                        .WithMany("RoundQuestions")
-                        .HasForeignKey("RoundId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("AllQueez.DAL.Entities.Theme", b =>
