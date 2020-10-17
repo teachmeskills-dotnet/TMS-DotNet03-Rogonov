@@ -1,4 +1,4 @@
-﻿@model RegisterViewModel
+﻿@model SignUpViewModel
 
 @{ 
     ViewData["Title"] = "Sign Up";
@@ -6,7 +6,7 @@
 
 <h1>Sign Up</h1>
 
-<form method="post" asp-controller="Account" asp-action="Register">
+<form method="post" asp-controller="Account" asp-action="SignUp">
     <div asp-validation-summary="ModelOnly"></div>
     <div>
         <label asp-for="Email"></label><br />
@@ -29,6 +29,6 @@
         <span asp-validation-for="PasswordConfirm"></span>
     </div>
     <div>
-        <input type="submit" value="Registration" />
+        <input type="submit" value="Sign Up" />
     </div>
 </form>

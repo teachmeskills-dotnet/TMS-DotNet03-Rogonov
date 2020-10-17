@@ -3,17 +3,10 @@
 namespace AllQueez.Web.ViewModels
 {
     /// <summary>
-    /// Register view model.
+    /// Sign in model.
     /// </summary>
-    public class RegisterViewModel
+    public class SignInViewModel
     {
-        /// <summary>
-        /// Email.
-        /// </summary>
-        [Required]
-        [Display(Name = nameof(Email))]
-        public string Email { get; set; }
-
         /// <summary>
         /// Username.
         /// </summary>
@@ -29,13 +22,16 @@ namespace AllQueez.Web.ViewModels
         [Display(Name = nameof(Password))]
         public string Password { get; set; }
 
+        // TODO: move to constants
         /// <summary>
-        /// Password confirmation.
+        /// Remember me.
         /// </summary>
-        [Required]
-        [Compare(nameof(Password), ErrorMessage = "Passwords don't match.")]
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        public string PasswordConfirm { get; set; }
+        [Display(Name = "Remember me")]
+        public bool RememberMe { get; set; }
+
+        /// <summary>
+        /// Return url.
+        /// </summary>
+        public string ReturnUrl { get; set; }
     }
 }
