@@ -26,7 +26,7 @@ namespace AllQueez.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SignUp(RegisterViewModel model)
+        public async Task<IActionResult> SignUp(SignUpViewModel model)
         {
             if (ModelState.IsValid)
             {

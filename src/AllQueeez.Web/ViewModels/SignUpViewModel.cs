@@ -5,7 +5,7 @@ namespace AllQueez.Web.ViewModels
     /// <summary>
     /// Register view model.
     /// </summary>
-    public class RegisterViewModel
+    public class SignUpViewModel
     {
         /// <summary>
         /// Email.
