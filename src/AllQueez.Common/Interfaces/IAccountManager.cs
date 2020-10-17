@@ -9,11 +9,11 @@ namespace AllQueez.Common.Interfaces
     public interface IAccountManager
     {
         /// <summary>
-        /// Registration.
+        /// Sign up.
         /// </summary>
         /// <param name="email">Email.</param>
         /// <param name="password">Password.</param>
         /// <returns>Identity result.</returns>
-        Task<IdentityResult> RegisterAsync(string email, string username, string password);
+        Task<IdentityResult> SignUpAsync(string email, string username, string password);
     }
 }
