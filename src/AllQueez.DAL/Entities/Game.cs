@@ -1,7 +1,6 @@
 ﻿using AllQueez.Common.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace AllQueez.DAL.Entities
 {

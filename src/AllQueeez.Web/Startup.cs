@@ -1,3 +1,5 @@
+using AllQueez.BLL.Managers;
+using AllQueez.Common.Interfaces;
 using AllQueez.DAL.Context;
 using AllQueez.DAL.Entities;
 using Microsoft.AspNetCore.Builder;
@@ -22,28 +24,34 @@ namespace AllQueez.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IAccountManager, AccountManager>();
+
             services.AddDbContext<AllQueezContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("AllQueezConnection")));
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<AllQueezContext>();
+
+            services.AddControllersWithViews();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            app.UseDeveloperExceptionPage();
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseRouting();
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

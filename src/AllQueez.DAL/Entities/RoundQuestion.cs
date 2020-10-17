@@ -1,9 +1,11 @@
-﻿namespace AllQueez.DAL.Entities
+﻿using AllQueez.Common.Interfaces;
+
+namespace AllQueez.DAL.Entities
 {
     /// <summary>
     /// Round questions.
     /// </summary>
-    public class RoundQuestion
+    public class RoundQuestion : IHasDbIdentity
     {
         /// <inheritdoc/>
         public int Id { get; set; }
