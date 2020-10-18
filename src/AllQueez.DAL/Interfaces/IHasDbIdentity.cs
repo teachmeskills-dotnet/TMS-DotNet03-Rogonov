@@ -1,4 +1,4 @@
-﻿namespace AllQueez.Common.Interfaces
+﻿namespace AllQueez.DAL.Interfaces
 {
     /// <summary>
     /// Interface for identity implementation.

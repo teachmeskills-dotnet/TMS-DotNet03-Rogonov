@@ -6,6 +6,8 @@
 
 @if (User.Identity.IsAuthenticated)
 {
+    <a asp-controller="Theme" asp-action="Index">Themes</a>
+
     <p>@User.Identity.Name</p>
 
     <form method="post" asp-controller="Account" asp-action="LogOut">

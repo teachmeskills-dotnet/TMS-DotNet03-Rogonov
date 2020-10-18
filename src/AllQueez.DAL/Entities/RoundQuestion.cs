@@ -1,4 +1,4 @@
-﻿using AllQueez.Common.Interfaces;
+﻿using AllQueez.DAL.Interfaces;
 
 namespace AllQueez.DAL.Entities
 {

@@ -1,15 +1,14 @@
+using AllQueez.BLL.Interfaces;
 using AllQueez.BLL.Managers;
-using AllQueez.Common.Interfaces;
+using AllQueez.BLL.Repository;
 using AllQueez.DAL.Context;
 using AllQueez.DAL.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace AllQueez.Web
 {
@@ -24,14 +23,22 @@ namespace AllQueez.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IAccountManager, AccountManager>();
+            // Repository pattern (Generic)
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
+            // Managers
+            services.AddScoped<IAccountManager, AccountManager>();
+            services.AddScoped<IThemeManager, ThemeManager>();
+
+            // Database context
             services.AddDbContext<AllQueezContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("AllQueezConnection")));
 
+            // ASP.NET Core Identity
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<AllQueezContext>();
 
+            // Microsoft services
             services.AddControllersWithViews();
         }
 

@@ -1,6 +1,7 @@
-﻿using AllQueez.Common.Interfaces;
+﻿using AllQueez.BLL.Interfaces;
 using AllQueez.DAL.Entities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 
@@ -23,6 +24,12 @@ namespace AllQueez.BLL.Managers
                 UserName = username,
             };
             return await _userManager.CreateAsync(user, password);
+        }
+
+        public async Task<string> GetUserIdByNameAsync(string name)
+        {
+            var user = await _userManager.Users.FirstAsync(u => u.UserName == name);
+            return user.Id;
         }
     }
 }

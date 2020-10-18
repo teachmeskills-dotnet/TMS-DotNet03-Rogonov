@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 
-namespace AllQueez.Common.Interfaces
+namespace AllQueez.BLL.Interfaces
 {
     /// <summary>
     /// Account manager interface.
@@ -15,5 +15,12 @@ namespace AllQueez.Common.Interfaces
         /// <param name="password">Password.</param>
         /// <returns>Identity result.</returns>
         Task<IdentityResult> SignUpAsync(string email, string username, string password);
+
+        /// <summary>
+        /// Get user identifier by name.
+        /// </summary>
+        /// <param name="name">User name.</param>
+        /// <returns>Identifier (GUID).</returns>
+        Task<string> GetUserIdByNameAsync(string name);
     }
 }

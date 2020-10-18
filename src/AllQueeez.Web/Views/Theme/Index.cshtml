@@ -1,0 +1,25 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model IEnumerable<ThemesViewModel>
+
+@{ 
+    ViewData["Title"] = "Themes";
+}
+
+@if (Model.Any())
+{
+    foreach (var theme in Model)
+    {
+        <div>@theme.Id</div>
+        <div>@theme.Name</div>
+    }
+    <br />
+}
+else
+{
+    <div>Empty themes list</div>
+}

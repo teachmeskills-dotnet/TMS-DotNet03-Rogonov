@@ -1,4 +1,4 @@
-﻿using AllQueez.Common.Interfaces;
+﻿using AllQueez.BLL.Interfaces;
 using AllQueez.DAL.Entities;
 using AllQueez.Web.ViewModels;
 using Microsoft.AspNetCore.Identity;
