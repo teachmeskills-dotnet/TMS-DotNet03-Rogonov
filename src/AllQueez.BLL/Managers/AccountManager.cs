@@ -1,4 +1,5 @@
 ﻿using AllQueez.BLL.Interfaces;
+using AllQueez.BLL.Models;
 using AllQueez.DAL.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -16,14 +17,14 @@ namespace AllQueez.BLL.Managers
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
         }
 
-        public async Task<IdentityResult> SignUpAsync(string email, string username, string password)
+        public async Task<IdentityResult> SignUpAsync(UserDto userDto)
         {
             var user = new User
             {
-                Email = email,
-                UserName = username,
+                Email = userDto.Email,
+                UserName = userDto.Username,
             };
-            return await _userManager.CreateAsync(user, password);
+            return await _userManager.CreateAsync(user, userDto.Password);
         }
 
         public async Task<string> GetUserIdByNameAsync(string name)

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<GamesViewModel>
+
+@{
+    ViewData["Title"] = "Games";
+}
+
+@if (Model.Any())
+{
+    foreach (var game in Model)
+    {
+        <div>@game.Id</div>
+        <div>@game.Title</div>
+        <div>@game.ThemeId</div>
+        <div>@game.Date</div>
+
+    }
+    <br />
+}
+else
+{
+    <div>Empty games list</div>
+}

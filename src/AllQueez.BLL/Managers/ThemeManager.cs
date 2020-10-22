@@ -21,13 +21,18 @@ namespace AllQueez.BLL.Managers
 
         public async Task<IEnumerable<ThemeDto>> GetThemeByUserIdAsync(string userId)
         {
+            var themeDtos = new List<ThemeDto>();
             var themes = await _repositoryTheme
                 .GetAll()
                 .AsNoTracking()
                 .Where(theme => theme.UserId == userId)
                 .ToListAsync();
 
-            var themeDtos = new List<ThemeDto>();
+            if (!themes.Any())
+            {
+                return themeDtos;
+            }
+
             foreach (var theme in themes)
             {
                 themeDtos.Add(new ThemeDto

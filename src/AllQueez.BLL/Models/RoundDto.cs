@@ -1,9 +1,9 @@
 ﻿namespace AllQueez.BLL.Models
 {
     /// <summary>
-    /// Theme data tansfer object.
+    /// Round data tansfer object.
     /// </summary>
-    public class ThemeDto
+    public class RoundDto
     {
         /// <summary>
         /// Identifier.
@@ -16,8 +16,18 @@
         public string UserId { get; set; }
 
         /// <summary>
-        /// Theme name.
+        /// Game id.
         /// </summary>
-        public string Name { get; set; }
+        public int GameId { get; set; }
+
+        /// <summary>
+        /// Round title.
+        /// </summary>
+        public string Title { get; set; }
+
+        /// <summary>
+        /// Round type.
+        /// </summary>
+        public string Type { get; set; }
     }
 }

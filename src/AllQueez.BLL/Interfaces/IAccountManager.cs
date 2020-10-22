@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AllQueez.BLL.Models;
+using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 
 namespace AllQueez.BLL.Interfaces
@@ -11,10 +12,10 @@ namespace AllQueez.BLL.Interfaces
         /// <summary>
         /// Sign up.
         /// </summary>
-        /// <param name="email">Email.</param>
+        /// <param name="user-Dto">User data transfer object.</param>
         /// <param name="password">Password.</param>
         /// <returns>Identity result.</returns>
-        Task<IdentityResult> SignUpAsync(string email, string username, string password);
+        Task<IdentityResult> SignUpAsync(UserDto userDto);
 
         /// <summary>
         /// Get user identifier by name.

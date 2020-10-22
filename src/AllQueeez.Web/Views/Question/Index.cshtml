@@ -1,0 +1,24 @@
+﻿@model IEnumerable<QuestionsViewModel>
+
+@{
+    ViewData["Title"] = "Questions";
+}
+
+@if (Model.Any())
+{
+    foreach (var question in Model)
+    {
+        <div>@question.Id</div>
+        <div>@question.Title</div>
+        <div>@question.Description</div>
+        <div>@question.Comment</div>
+        <div>@question.File</div>
+        <div>@question.Path</div>
+        <div>@question.Answer</div>
+    }
+    <br />
+}
+else
+{
+    <div>Empty questions list</div>
+}

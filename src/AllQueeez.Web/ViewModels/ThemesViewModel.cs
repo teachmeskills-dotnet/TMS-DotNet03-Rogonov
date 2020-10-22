@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace AllQueez.Web.ViewModels
+﻿namespace AllQueez.Web.ViewModels
 {
     /// <summary>
-    /// Themes list view.
+    /// Themes list view model.
     /// </summary>
     public class ThemesViewModel
     {
@@ -14,7 +9,7 @@ namespace AllQueez.Web.ViewModels
         /// Identifier.
         /// </summary>
         public int Id { get; set; }
-                
+
         /// <summary>
         /// Theme name.
         /// </summary>

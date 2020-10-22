@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 namespace AllQueez.BLL.Interfaces
 {
     /// <summary>
-    /// Theme manager interface.
+    /// Round manager interface.
     /// </summary>
-    public interface IThemeManager
+    public interface IRoundManager
     {
         /// <summary>
-        /// Get theme by user identifier.
+        /// Get round by user identifier.
         /// </summary>
         /// <param name="id">User identifier.</param>
-        /// <returns>Theme.</returns>
-        Task<IEnumerable<ThemeDto>> GetThemeByUserIdAsync(string userId);
+        /// <returns>Round.</returns>
+        Task<IEnumerable<RoundDto>> GetRoundByUserIdAsync(string userId);
     }
 }

@@ -28,7 +28,10 @@ namespace AllQueez.Web
 
             // Managers
             services.AddScoped<IAccountManager, AccountManager>();
-            services.AddScoped<IThemeManager, ThemeManager>();
+            services.AddScoped<IRoundQuestionManager, RoundQuestionManager>();
+            services.AddScoped<IGameManager, GameManager>();
+            services.AddScoped<IRoundManager, RoundManager>();
+            services.AddScoped<IQuestionManager, QuestionManager>();
 
             // Database context
             services.AddDbContext<AllQueezContext>(options =>
@@ -40,6 +43,10 @@ namespace AllQueez.Web
 
             // Microsoft services
             services.AddControllersWithViews();
+            services.ConfigureApplicationCookie(config =>
+            {
+                config.Cookie.Name = "AllQueez.Cookie";
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

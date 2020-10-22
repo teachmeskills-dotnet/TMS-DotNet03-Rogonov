@@ -1,6 +1,8 @@
 ﻿using AllQueez.BLL.Interfaces;
+using AllQueez.BLL.Models;
 using AllQueez.DAL.Entities;
 using AllQueez.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -19,27 +21,39 @@ namespace AllQueez.Web.Controllers
             _signInManager = signInManager ?? throw new ArgumentNullException(nameof(accountManager));
         }
 
+        [Authorize]
+        public IActionResult Secret(int id, [FromQuery] string query, [FromBody] SecretViewModel secret, [FromHeader] string secretValue)
+        {
+            return Content($"Route: {id}, Query: {query}, Body: {secret.Key}, Header: {secretValue}");
+        }
+
         [HttpGet]
-        public IActionResult SignUp()
+        public IActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> SignUp(SignUpViewModel model)
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                // TODO: refactor
-                var user = new User
+                var userDto = new UserDto
                 {
                     Email = model.Email,
-                    UserName = model.Username,
+                    Username = model.Username,
+                    Password = model.Password
                 };
-
-                var result = await _accountManager.SignUpAsync(model.Email, model.Username, model.Password);
+                
+                var result = await _accountManager.SignUpAsync(userDto);
                 if (result.Succeeded)
                 {
+                    var user = new User
+                    {
+                        Email = model.Email,
+                        UserName = model.Username
+                    };
+
                     await _signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "Home");
                 }
@@ -54,18 +68,18 @@ namespace AllQueez.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult SignIn(string returnUrl = null)
+        public IActionResult Login(string returnUrl = null)
         {
-            var signInViewModel = new SignInViewModel
+            var loginViewModel = new LoginViewModel
             {
                 ReturnUrl = returnUrl
             };
-            return View(signInViewModel);
+            return View(loginViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SignIn(SignInViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +101,7 @@ namespace AllQueez.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LogOut()
+        public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");

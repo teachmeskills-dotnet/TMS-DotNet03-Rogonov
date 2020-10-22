@@ -3,9 +3,9 @@
 namespace AllQueez.Web.ViewModels
 {
     /// <summary>
-    /// Sign in model.
+    /// Login view model.
     /// </summary>
-    public class SignInViewModel
+    public class LoginViewModel
     {
         /// <summary>
         /// Username.
@@ -22,7 +22,6 @@ namespace AllQueez.Web.ViewModels
         [Display(Name = nameof(Password))]
         public string Password { get; set; }
 
-        // TODO: move to constants
         /// <summary>
         /// Remember me.
         /// </summary>

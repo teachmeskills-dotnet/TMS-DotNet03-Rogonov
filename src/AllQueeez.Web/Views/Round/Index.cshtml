@@ -1,0 +1,21 @@
+﻿@model IEnumerable<RoundsViewModel>
+
+@{
+    ViewData["Title"] = "Rounds";
+}
+
+@if (Model.Any())
+{
+    foreach (var round in Model)
+    {
+        <div>@round.Id</div>
+        <div>@round.GameId</div>
+        <div>@round.Title</div>
+        <div>@round.Type</div>
+    }
+    <br />
+}
+else
+{
+    <div>Empty rounds list</div>
+}

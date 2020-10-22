@@ -1,5 +1,4 @@
 ﻿using AllQueez.BLL.Interfaces;
-using AllQueez.BLL.Managers;
 using AllQueez.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +11,9 @@ namespace AllQueez.Web.Controllers
     public class ThemeController : Controller
     {
         private readonly IAccountManager _accountManager;
-        private readonly IThemeManager _themeManager;
+        private readonly IRoundQuestionManager _themeManager;
 
-        public ThemeController(IAccountManager accountManager, IThemeManager themeManager)
+        public ThemeController(IAccountManager accountManager, IRoundQuestionManager themeManager)
         {
             _accountManager = accountManager ?? throw new System.ArgumentNullException(nameof(accountManager));
             _themeManager = themeManager ?? throw new System.ArgumentNullException(nameof(themeManager));

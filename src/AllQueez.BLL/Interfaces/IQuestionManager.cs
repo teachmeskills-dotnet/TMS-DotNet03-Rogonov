@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 namespace AllQueez.BLL.Interfaces
 {
     /// <summary>
-    /// Theme manager interface.
+    /// Question manager interface.
     /// </summary>
-    public interface IThemeManager
+    public interface IQuestionManager
     {
         /// <summary>
-        /// Get theme by user identifier.
+        /// Get question by user identifier.
         /// </summary>
         /// <param name="id">User identifier.</param>
-        /// <returns>Theme.</returns>
-        Task<IEnumerable<ThemeDto>> GetThemeByUserIdAsync(string userId);
+        /// <returns>Question.</returns>
+        Task<IEnumerable<QuestionDto>> GetQuestionByUserIdAsync(string userId);
     }
 }
