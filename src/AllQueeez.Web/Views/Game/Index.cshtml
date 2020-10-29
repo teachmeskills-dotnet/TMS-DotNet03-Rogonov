@@ -1,8 +1,10 @@
 ﻿@model IEnumerable<GamesViewModel>
 
 @{
-    ViewData["Title"] = "Games";
+    ViewData["Title"] = "Queezes";
 }
+
+<a asp-controller="Game" asp-action="Create">Add game</a>
 
 @if (Model.Any())
 {
@@ -12,7 +14,9 @@
         <div>@game.Title</div>
         <div>@game.ThemeId</div>
         <div>@game.Date</div>
-
+        <form method="delete" asp-controller="Game" asp-action="Delete" asp-route-id="@game.Id">
+            <button type="submit">Delete</button>
+        </form>
     }
     <br />
 }

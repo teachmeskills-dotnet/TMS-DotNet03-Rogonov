@@ -19,6 +19,21 @@ namespace AllQueez.BLL.Managers
             _repositoryRound = repositoryRound ?? throw new ArgumentNullException(nameof(repositoryRound));
         }
 
+        public async Task CreateAsync(RoundDto roundDto)
+        {
+            var round = new Round
+            {
+                Id = roundDto.Id,
+                UserId = roundDto.UserId,
+                GameId = roundDto.GameId,
+                Title = roundDto.Title,
+                Type = roundDto.Type,
+            };
+
+            await _repositoryRound.CreateAsync(round);
+            await _repositoryRound.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<RoundDto>> GetRoundByUserIdAsync(string userId)
         {
             var roundDtos = new List<RoundDto>();
@@ -46,6 +61,19 @@ namespace AllQueez.BLL.Managers
             }
 
             return roundDtos;
+        }
+
+        public async Task DeleteAsync(int id, string userId)
+        {
+            var round = await _repositoryRound.GetEntityAsync(round => round.Id == id && round.UserId == userId);
+            // TODO: checks and confirmation
+
+            if (round is null)
+            {
+                return;
+            }
+            _repositoryRound.Delete(round);
+            await _repositoryRound.SaveChangesAsync();
         }
     }
 }

@@ -1,27 +1,17 @@
-﻿using AllQueez.DAL.Interfaces;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace AllQueez.DAL.Entities
+namespace AllQueez.Web.ViewModels
 {
-    /// <summary>
-    /// Questions.
-    /// </summary>
-    public class Question : IHasDbIdentity, IHasUserIdentity
+    public class QuestionActionsViewModel
     {
-        /// <inheritdoc/>
-        public int Id { get; set; }
-
-        /// <inheritdoc/>
-        public string UserId { get; set; }
-
-        /// <summary>
-        /// Navigation to User.
-        /// </summary>
-        public User User { get; set; }
-
         /// <summary>
         /// Title.
         /// </summary>
+        [Required]
         public string Title { get; set; }
 
         /// <summary>
@@ -47,6 +37,7 @@ namespace AllQueez.DAL.Entities
         /// <summary>
         /// Answer.
         /// </summary>
+        [Required]
         public string Answer { get; set; }
     }
 }

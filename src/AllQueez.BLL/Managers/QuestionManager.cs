@@ -19,6 +19,24 @@ namespace AllQueez.BLL.Managers
             _repositoryQuestion = repositoryQuestion ?? throw new ArgumentNullException(nameof(repositoryQuestion));
         }
 
+        public async Task CreateAsync(QuestionDto questionDto)
+        {
+            var question = new Question
+            {
+                Id = questionDto.Id,
+                UserId = questionDto.UserId,
+                Title = questionDto.Title,
+                Description = questionDto.Description,
+                Comment = questionDto.Comment,
+                File = questionDto.File,
+                Path = questionDto.Path,
+                Answer = questionDto.Answer
+            };
+
+            await _repositoryQuestion.CreateAsync(question);
+            await _repositoryQuestion.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<QuestionDto>> GetQuestionByUserIdAsync(string userId)
         {
             var questionDtos = new List<QuestionDto>();
@@ -49,6 +67,19 @@ namespace AllQueez.BLL.Managers
             }
 
             return questionDtos;
+        }
+
+        public async Task DeleteAsync(int id, string userId)
+        {
+            var question = await _repositoryQuestion.GetEntityAsync(question => question.Id == id && question.UserId == userId);
+            // TODO: checks and confirmation
+
+            if (question is null)
+            {
+                return;
+            }
+            _repositoryQuestion.Delete(question);
+            await _repositoryQuestion.SaveChangesAsync();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AllQueez.BLL.Interfaces;
+using AllQueez.BLL.Models;
 using AllQueez.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,9 +12,9 @@ namespace AllQueez.Web.Controllers
     public class ThemeController : Controller
     {
         private readonly IAccountManager _accountManager;
-        private readonly IRoundQuestionManager _themeManager;
+        private readonly IThemeManager _themeManager;
 
-        public ThemeController(IAccountManager accountManager, IRoundQuestionManager themeManager)
+        public ThemeController(IAccountManager accountManager, IThemeManager themeManager)
         {
             _accountManager = accountManager ?? throw new System.ArgumentNullException(nameof(accountManager));
             _themeManager = themeManager ?? throw new System.ArgumentNullException(nameof(themeManager));
@@ -35,6 +36,39 @@ namespace AllQueez.Web.Controllers
             }
 
             return View(themeViewModels);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(ThemeActionsViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
+                var themeDto = new ThemeDto
+                {
+                    UserId = userId,
+                    Name = model.Name
+                };
+
+                await _themeManager.CreateAsync(themeDto);
+                return RedirectToAction("Index", "Theme");
+            }
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
+            await _themeManager.DeleteAsync(id, userId);
+            return RedirectToAction("Index", "Theme");
         }
     }
 }

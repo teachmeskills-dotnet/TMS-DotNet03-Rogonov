@@ -4,6 +4,8 @@
     ViewData["Title"] = "Rounds";
 }
 
+<a asp-controller="Round" asp-action="Create">Add round</a>
+
 @if (Model.Any())
 {
     foreach (var round in Model)
@@ -12,6 +14,9 @@
         <div>@round.GameId</div>
         <div>@round.Title</div>
         <div>@round.Type</div>
+        <form method="delete" asp-controller="Round" asp-action="Delete" asp-route-id="@round.Id">
+            <button type="submit">Delete</button>
+        </form>
     }
     <br />
 }

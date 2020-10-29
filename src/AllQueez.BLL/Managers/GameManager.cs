@@ -19,6 +19,21 @@ namespace AllQueez.BLL.Managers
             _repositoryGame = repositoryGame ?? throw new ArgumentNullException(nameof(repositoryGame));
         }
 
+        public async Task CreateAsync(GameDto gameDto)
+        {
+            var game = new Game
+            {
+                Id = gameDto.Id,
+                UserId = gameDto.UserId,
+                ThemeId = gameDto.ThemeId,
+                Title = gameDto.Title,
+                Date = gameDto.Date
+            };
+
+            await _repositoryGame.CreateAsync(game);
+            await _repositoryGame.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<GameDto>> GetGameByUserIdAsync(string userId)
         {
             var gameDtos = new List<GameDto>();
@@ -71,5 +86,18 @@ namespace AllQueez.BLL.Managers
 
         //    return gameDtos;
         //}
+
+        public async Task DeleteAsync(int id, string userId)
+        {
+            var game = await _repositoryGame.GetEntityAsync(game => game.Id == id && game.UserId == userId);
+            // TODO: checks and confirmation
+
+            if (game is null)
+            {
+                return;
+            }
+            _repositoryGame.Delete(game);
+            await _repositoryGame.SaveChangesAsync();
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace AllQueez.DAL.Entities
         /// <summary>
         /// Navigation to Themes.
         /// </summary>
-        public ICollection<RoundQuestion> Themes { get; set; }
+        public ICollection<Theme> Themes { get; set; }
 
         /// <summary>
         /// Navigation to Games.

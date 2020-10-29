@@ -13,18 +13,6 @@ namespace AllQueez.BLL.Interfaces
     public interface IRepository<T> where T : class
     {
         /// <summary>
-        /// Create new entity async.
-        /// </summary>
-        /// <param name="entity">Entity object.</param>
-        Task CreateAsync(T entity);
-
-        /// <summary>
-        /// Create new entities async.
-        /// </summary>
-        /// <param name="entities">Entity collection.</param>
-        Task CreateRangeAsync(IEnumerable<T> entities);
-
-        /// <summary>
         /// Get all queries.
         /// </summary>
         /// <returns>IQueryable queries.</returns>
@@ -36,6 +24,18 @@ namespace AllQueez.BLL.Interfaces
         /// <param name="predicate">LINQ predicate.</param>
         /// <returns>T entity.</returns>
         Task<T> GetEntityAsync(Expression<Func<T, bool>> predicate);
+
+        /// <summary>
+        /// Create new entity async.
+        /// </summary>
+        /// <param name="entity">Entity object.</param>
+        Task CreateAsync(T entity);
+
+        /// <summary>
+        /// Create new entities async.
+        /// </summary>
+        /// <param name="entities">Entity collection.</param>
+        Task CreateRangeAsync(IEnumerable<T> entities);
 
         /// <summary>
         /// Get entity async by predicate (without tracking).

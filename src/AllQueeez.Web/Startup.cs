@@ -28,7 +28,7 @@ namespace AllQueez.Web
 
             // Managers
             services.AddScoped<IAccountManager, AccountManager>();
-            services.AddScoped<IRoundQuestionManager, RoundQuestionManager>();
+            services.AddScoped<IThemeManager, ThemeManager>();
             services.AddScoped<IGameManager, GameManager>();
             services.AddScoped<IRoundManager, RoundManager>();
             services.AddScoped<IQuestionManager, QuestionManager>();

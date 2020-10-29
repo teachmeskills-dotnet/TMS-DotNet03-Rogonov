@@ -1,0 +1,19 @@
+﻿@model ThemeActionsViewModel
+
+@{
+    ViewData["Title"] = "Add theme";
+}
+
+<h1>Add new theme</h1>
+
+<form method="post" asp-controller="Theme" asp-action="Create">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div>
+        <label asp-for="Name"></label><br />
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div>
+        <button type="submit">Add</button>
+    </div>
+</form>

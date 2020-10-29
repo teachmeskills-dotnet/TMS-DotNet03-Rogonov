@@ -28,7 +28,7 @@ namespace AllQueez.DAL.Entities
         /// <summary>
         /// Navigation to Theme.
         /// </summary>
-        public RoundQuestion Theme { get; set; }
+        public Theme Theme { get; set; }
 
         /// <summary>
         /// Navigation to Round.

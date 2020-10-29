@@ -1,0 +1,44 @@
+﻿@model QuestionActionsViewModel
+
+@{
+    ViewData["Title"] = "Add question";
+}
+
+<h1>Add new question</h1>
+
+<form method="post" asp-controller="Question" asp-action="Create">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div>
+        <label asp-for="Title"></label><br />
+        <input asp-for="Title"></input>
+        <span asp-validation-for="Title"></span>
+    </div>
+    <div>
+        <label asp-for="Description"></label><br />
+        <input asp-for="Description" />
+        <span asp-validation-for="Description"></span>
+    </div>
+    <div>
+        <label asp-for="Comment"></label><br />
+        <input asp-for="Comment" />
+        <span asp-validation-for="Comment"></span>
+    </div>
+    <div>
+        <label asp-for="File"></label><br />
+        <input asp-for="File"></input>
+        <span asp-validation-for="File"></span>
+    </div>
+    <div>
+        <label asp-for="Path"></label><br />
+        <input asp-for="Path" />
+        <span asp-validation-for="Path"></span>
+    </div>
+    <div>
+        <label asp-for="Answer"></label><br />
+        <input asp-for="Answer" />
+        <span asp-validation-for="Answer"></span>
+    </div>
+    <div>
+        <button type="submit">Add</button>
+    </div>
+</form>

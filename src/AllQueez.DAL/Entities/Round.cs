@@ -38,10 +38,5 @@ namespace AllQueez.DAL.Entities
         /// Round type.
         /// </summary>
         public string Type { get; set; }
-
-        /// <summary>
-        /// Navigation to Round questions.
-        /// </summary>
-        public ICollection<RoundQuestion> RoundQuestions { get; set; }
     }
 }

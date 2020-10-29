@@ -4,6 +4,8 @@
     ViewData["Title"] = "Questions";
 }
 
+<a asp-controller="Question" asp-action="Create">Add question</a>
+
 @if (Model.Any())
 {
     foreach (var question in Model)
@@ -15,6 +17,9 @@
         <div>@question.File</div>
         <div>@question.Path</div>
         <div>@question.Answer</div>
+        <form method="delete" asp-controller="Question" asp-action="Delete" asp-route-id="@question.Id">
+            <button type="submit">Delete</button>
+        </form>
     }
     <br />
 }

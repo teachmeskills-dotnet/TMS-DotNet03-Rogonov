@@ -9,15 +9,15 @@ namespace AllQueez.DAL.Configurations
     /// <summary>
     /// EF Core Configuration for Theme entity.
     /// </summary>
-    public class ThemeConfiguration : IEntityTypeConfiguration<RoundQuestion>
+    public class ThemeConfiguration : IEntityTypeConfiguration<Theme>
     {
         /// <inheritdoc/>
-        public void Configure(EntityTypeBuilder<RoundQuestion> builder)
+        public void Configure(EntityTypeBuilder<Theme> builder)
         {
             builder = builder ?? throw new ArgumentNullException(nameof(builder));
 
             builder.ToTable(TableConstants.Themes, SchemaConstants.Theme)
-                .HasKey((System.Linq.Expressions.Expression<Func<RoundQuestion, object>>)(theme => (object)theme.Id));
+                .HasKey((System.Linq.Expressions.Expression<Func<Theme, object>>)(theme => (object)theme.Id));
 
             builder.Property(theme => theme.Name)
                 .IsRequired()

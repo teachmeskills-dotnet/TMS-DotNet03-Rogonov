@@ -10,10 +10,16 @@ namespace AllQueez.BLL.Interfaces
     public interface IGameManager
     {
         /// <summary>
+        /// Create game by user identifier.
+        /// </summary>
+        /// <param name="gameDto">Game data transfer object.</param>
+        Task CreateAsync(GameDto gameDto);
+
+        /// <summary>
         /// Get game by user identifier.
         /// </summary>
-        /// <param name="id">User identifier.</param>
-        /// <returns>Game.</returns>
+        /// <param name="userId">User identifier.</param>
+        /// <returns>List of Game data transfer objects.</returns>
         Task<IEnumerable<GameDto>> GetGameByUserIdAsync(string userId);
 
         ///// <summary>
@@ -22,5 +28,12 @@ namespace AllQueez.BLL.Interfaces
         ///// <param name="id">Theme identifier.</param>
         ///// <returns>Game.</returns>
         //Task<IEnumerable<GameDto>> GetGameByThemeIdAsync(int themeId);
+
+        /// <summary>
+        /// Delete game by user and game identifiers.
+        /// </summary>
+        /// <param name="id">Game identifier.</param>
+        /// <param name="userId">User identifier..</param>
+        Task DeleteAsync(int id, string userId);
     }
 }
