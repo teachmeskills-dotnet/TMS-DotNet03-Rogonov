@@ -1,12 +1,14 @@
 ﻿using AllQueez.BLL.Interfaces;
 using AllQueez.BLL.Models;
-using AllQueez.DAL.Entities;
 using AllQueez.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
+using AllQueez.DAL.Context;
+using AllQueez.DAL.Entities;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AllQueez.Web.Controllers
 {
@@ -15,11 +17,13 @@ namespace AllQueez.Web.Controllers
     {
         private readonly IAccountManager _accountManager;
         private readonly IGameManager _gameManager;
+        private readonly AllQueezContext _allQueezContext;
 
-        public GameController(IAccountManager accountManager, IGameManager gameManager)
+        public GameController(IAccountManager accountManager, IGameManager gameManager, AllQueezContext allQueezContext)
         {
             _accountManager = accountManager ?? throw new System.ArgumentNullException(nameof(accountManager));
             _gameManager = gameManager ?? throw new System.ArgumentNullException(nameof(gameManager));
+            _allQueezContext = allQueezContext ?? throw new System.ArgumentNullException(nameof(allQueezContext));
         }
 
         public async Task<IActionResult> Index()
@@ -45,7 +49,9 @@ namespace AllQueez.Web.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            IEnumerable<Theme> themes = new List<Theme>();
+            List<Theme> themes = new List<Theme>();
+            themes = (from c in _allQueezContext.Themes select c).ToList();
+            themes.Insert(0, new Theme { Id = 0, Name = "Select Theme or Add new one" });
             ViewBag.Themes = new SelectList(themes, "Id", "Name");
 
             return View();

@@ -10,12 +10,12 @@
     <div asp-validation-summary="ModelOnly"></div>
     <div>
         <label asp-for="Title"></label><br />
-        <input asp-for="Title"></input>
+        <input asp-for="Title" />
         <span asp-validation-for="Title"></span>
     </div>
     <div>
         <label asp-for="Description"></label><br />
-        <input asp-for="Description" />
+        <textarea asp-for="Description"></textarea>
         <span asp-validation-for="Description"></span>
     </div>
     <div>
@@ -25,7 +25,7 @@
     </div>
     <div>
         <label asp-for="File"></label><br />
-        <input asp-for="File"></input>
+        <input asp-for="File" />
         <span asp-validation-for="File"></span>
     </div>
     <div>

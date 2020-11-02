@@ -1,5 +1,6 @@
 ﻿using AllQueez.BLL.Interfaces;
 using AllQueez.BLL.Models;
+using AllQueez.DAL.Context;
 using AllQueez.DAL.Entities;
 using AllQueez.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -15,11 +16,13 @@ namespace AllQueez.Web.Controllers
     {
         private readonly IAccountManager _accountManager;
         private readonly IRoundManager _roundManager;
+        private readonly AllQueezContext _allQueezContext;
 
-        public RoundController(IAccountManager accountManager, IRoundManager roundManager)
+        public RoundController(IAccountManager accountManager, IRoundManager roundManager, AllQueezContext allQueezContext)
         {
             _accountManager = accountManager ?? throw new System.ArgumentNullException(nameof(accountManager));
             _roundManager = roundManager ?? throw new System.ArgumentNullException(nameof(roundManager));
+            _allQueezContext = allQueezContext ?? throw new System.ArgumentNullException(nameof(allQueezContext));        
         }
 
         public async Task<IActionResult> Index()
@@ -45,9 +48,6 @@ namespace AllQueez.Web.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            IEnumerable<Game> games = new List<Game>();
-            ViewBag.Games = new SelectList(games, "Id", "Name");
-
             return View();
         }
 

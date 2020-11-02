@@ -6,12 +6,10 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    <a asp-controller="Theme" asp-action="Index">Themes</a>
     <a asp-controller="Game" asp-action="Index">Games</a>
+    <a asp-controller="Theme" asp-action="Index">Themes</a>
     <a asp-controller="Round" asp-action="Index">Rounds</a>
     <a asp-controller="Question" asp-action="Index">Questions</a>
-
-
 
     <p>@User.Identity.Name</p>
 

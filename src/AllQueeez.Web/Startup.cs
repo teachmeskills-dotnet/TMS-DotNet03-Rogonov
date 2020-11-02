@@ -38,8 +38,15 @@ namespace AllQueez.Web
                 options.UseSqlServer(Configuration.GetConnectionString("AllQueezConnection")));
 
             // ASP.NET Core Identity
-            services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<AllQueezContext>();
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireDigit = true;
+            })
+                .AddEntityFrameworkStores<DAL.Context.AllQueezContext>();
 
             // Microsoft services
             services.AddControllersWithViews();
