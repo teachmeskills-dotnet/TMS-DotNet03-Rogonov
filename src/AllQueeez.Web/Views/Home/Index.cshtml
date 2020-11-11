@@ -3,22 +3,3 @@
 }
 
 <h1>Index page</h1>
-
-@if (User.Identity.IsAuthenticated)
-{
-    <a asp-controller="Game" asp-action="Index">Games</a>
-    <a asp-controller="Theme" asp-action="Index">Themes</a>
-    <a asp-controller="Round" asp-action="Index">Rounds</a>
-    <a asp-controller="Question" asp-action="Index">Questions</a>
-
-    <p>@User.Identity.Name</p>
-
-    <form method="post" asp-controller="Account" asp-action="Logout">
-        <input type="submit" value="Logout" />
-    </form>
-}
-else
-{
-    <a asp-controller="Account" asp-action="Register">Register</a>
-    <a asp-controller="Account" asp-action="Login">Login</a>
-}

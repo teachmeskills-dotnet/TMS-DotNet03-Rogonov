@@ -9,6 +9,7 @@ using System.Linq;
 using AllQueez.DAL.Context;
 using AllQueez.DAL.Entities;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using AllQueez.BLL.Managers;
 
 namespace AllQueez.Web.Controllers
 {
@@ -17,13 +18,13 @@ namespace AllQueez.Web.Controllers
     {
         private readonly IAccountManager _accountManager;
         private readonly IGameManager _gameManager;
-        private readonly AllQueezContext _allQueezContext;
+        private readonly IThemeManager _themeManager;
 
-        public GameController(IAccountManager accountManager, IGameManager gameManager, AllQueezContext allQueezContext)
+        public GameController(IAccountManager accountManager, IGameManager gameManager, IThemeManager themeManager)
         {
             _accountManager = accountManager ?? throw new System.ArgumentNullException(nameof(accountManager));
             _gameManager = gameManager ?? throw new System.ArgumentNullException(nameof(gameManager));
-            _allQueezContext = allQueezContext ?? throw new System.ArgumentNullException(nameof(allQueezContext));
+            _themeManager = themeManager ?? throw new System.ArgumentNullException(nameof(themeManager));
         }
 
         public async Task<IActionResult> Index()
@@ -47,11 +48,11 @@ namespace AllQueez.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> CreateAsync()
         {
-            List<Theme> themes = new List<Theme>();
-            themes = (from c in _allQueezContext.Themes select c).ToList();
-            themes.Insert(0, new Theme { Id = 0, Name = "Select Theme or Add new one" });
+            var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
+            var themes = (await _themeManager.GetThemeByUserIdAsync(userId)).Select(c => new { c.Id, c.Name}).ToList();
+            themes.Insert(0, new { Id = 0, Name = "Select Theme or Add new one" });
             ViewBag.Themes = new SelectList(themes, "Id", "Name");
 
             return View();

@@ -4,23 +4,109 @@
     ViewData["Title"] = "Queezes";
 }
 
-<a asp-controller="Game" asp-action="Create">Add game</a>
+@*<a asp-controller="Game" asp-action="Create">Add game</a>*@
 
 @if (Model.Any())
 {
-    foreach (var game in Model)
-    {
-        <div>@game.Id</div>
-        <div>@game.Title</div>
-        <div>@game.ThemeId</div>
-        <div>@game.Date</div>
-        <form method="delete" asp-controller="Game" asp-action="Delete" asp-route-id="@game.Id">
-            <button type="submit">Delete</button>
-        </form>
-    }
-    <br />
+    <div class="wrapper">
+        <div class="header">
+            <div class="header-menu">
+                <div class="title">All<span>Queez</span></div>
+                <div class="sidebar-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="logout-btn">
+                    <a asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt"></i></a>
+                    @*<a href="#"><i class="fas fa-sign-out-alt"></i></a>*@
+                </div>
+            </div>
+        </div>
+        <div class="sidebar">
+            <div class="sidebar-menu">
+                <div class="profile">
+                    <img src="~/images/1.jpg" alt="">
+                    <p>Tkumwa</p>
+                </div>
+                <li class="active-item">
+                    <a href="#" class="menu-btn">
+                        <i class="fas fa-columns"></i><span>My queezes</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="#" class="menu-btn">
+                        <i class="fas fa-star"></i><span>Themes</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="#" class="menu-btn">
+                        <i class="fas fa-question"></i><span>Questions</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="#" class="menu-btn">
+                        <i class="fas fa-cog"></i><span>Settings</span>
+                    </a>
+                </li>
+            </div>
+        </div>
+        <div class="main-container">
+            <div class="title-row">
+                <span class="title">My queezes</span>
+                <form asp-controller="game" asp-action="create">
+                    <button type="submit" class="create-btn" >Add game</button>
+                </form>
+            </div>
+            <div class="search">
+                <i class="fas fa-search">
+                    <input type="text"
+                           placeholder="Type in your game title"
+                           onfocus="this.placeholder = ''"
+                           onblur="this.placeholder = 'Type in your game title'">
+                </i>
+            </div>
+            <div class="tiles">
+                @foreach (var game in Model)
+                {
+                    <div class="tile">
+                        <a href="#" class="tile-menu-btn">
+                            <i class="fas fa-ellipsis-v fa-2x"></i>
+                        </a>
+                        <div class="tile-title">@game.Title</div>
+                        <div class="tile-description">
+                            @game.ThemeId
+                        </div>
+                        <div class="contents-bar">
+                            <div class="rounds">
+                                <i class="far fa-list-alt fa-4x"><p>7 Rounds</p></i>
+                            </div>
+                            <div class="questions">
+                                <i class="far fa-question-circle fa-5x"><p>38 Questions</p></i>
+                            </div>
+                            <div class="timer">
+                                <i class="far fa-clock fa-3x"><p>2 Hours</p></i>
+                            </div>
+                        </div>
+                        <div class="tile-date">
+                            <i class="far fa-calendar-alt"></i><span>@game.Date</span>
+                        </div>
+                    </div>
+                    @*<div>@game.Id</div>
+                <div>@game.Title</div>
+                <div>@game.ThemeId</div>
+                <div>@game.Date</div>
+                <form method="delete" asp-controller="Game" asp-action="Delete" asp-route-id="@game.Id">
+                    <button type="submit">Delete</button>
+                </form>*@
+                }
+            </div>
+        </div>
+    </div>
+
 }
 else
 {
     <div>Empty games list</div>
+}
+@section css {
+    <link href="~/css/games.css" rel="stylesheet" />
 }

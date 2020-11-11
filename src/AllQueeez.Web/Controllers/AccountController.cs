@@ -55,7 +55,7 @@ namespace AllQueez.Web.Controllers
                     };
 
                     await _signInManager.SignInAsync(user, false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("App", "Home");
                 }
 
                 foreach (var error in result.Errors)
@@ -91,7 +91,7 @@ namespace AllQueez.Web.Controllers
                         return Redirect(model.ReturnUrl);
                     }
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Game");
                 }
 
                 ModelState.AddModelError(string.Empty, "Incorrect email and (or) password");
@@ -99,8 +99,6 @@ namespace AllQueez.Web.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();

@@ -9,9 +9,9 @@
 <form method="post" asp-controller="Game" asp-action="Create">
     <div asp-validation-summary="ModelOnly"></div>
     <div>
-        <select asp-for="ThemeId" asp-items="ViewBag.Themes"></select>
-        <label asp-for="ThemeId"></label><br />
-        <span asp-validation-for="ThemeId"></span>
+        <select asp-for="ThemeName" asp-items="ViewBag.Themes"></select>
+        <label asp-for="ThemeName"></label><br />
+        <span asp-validation-for="ThemeName"></span>
     </div>
     <div>
         <label asp-for="Title"></label><br />
