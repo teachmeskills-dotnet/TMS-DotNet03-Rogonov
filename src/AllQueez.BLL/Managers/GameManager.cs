@@ -41,6 +41,7 @@ namespace AllQueez.BLL.Managers
                 .GetAll()
                 .AsNoTracking()
                 .Where(game => game.UserId == userId)
+                .Include(game => game.Theme)
                 .ToListAsync();
 
             if (!games.Any())
@@ -55,6 +56,7 @@ namespace AllQueez.BLL.Managers
                     Id = game.Id,
                     UserId = game.UserId,
                     ThemeId = game.ThemeId,
+                    ThemeName = game.Theme.Name,
                     Title = game.Title,
                     Date = game.Date
                 });

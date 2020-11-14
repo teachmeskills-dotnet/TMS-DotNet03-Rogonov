@@ -3,13 +3,10 @@ using AllQueez.BLL.Models;
 using AllQueez.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
-using AllQueez.DAL.Context;
-using AllQueez.DAL.Entities;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using AllQueez.BLL.Managers;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace AllQueez.Web.Controllers
 {
@@ -39,6 +36,7 @@ namespace AllQueez.Web.Controllers
                 {
                     Id = gameDto.Id,
                     ThemeId = gameDto.ThemeId,
+                    ThemeName = gameDto.ThemeName,
                     Title = gameDto.Title,
                     Date = gameDto.Date
                 });
@@ -48,11 +46,11 @@ namespace AllQueez.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> CreateAsync()
+        public async Task<IActionResult> Create()
         {
             var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
-            var themes = (await _themeManager.GetThemeByUserIdAsync(userId)).Select(c => new { c.Id, c.Name}).ToList();
-            themes.Insert(0, new { Id = 0, Name = "Select Theme or Add new one" });
+            var themes = (await _themeManager.GetThemeByUserIdAsync(userId)).Select(c => new { c.Id, c.Name }).ToList();
+            themes.Insert(0, new { Id = 0, Name = "Theme name" });
             ViewBag.Themes = new SelectList(themes, "Id", "Name");
 
             return View();

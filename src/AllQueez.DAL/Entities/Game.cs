@@ -21,11 +21,6 @@ namespace AllQueez.DAL.Entities
         public int ThemeId { get; set; }
 
         /// <summary>
-        /// Theme name.
-        /// </summary>
-        public string ThemeName { get; set; }
-
-        /// <summary>
         /// Navigation to User.
         /// </summary>
         public User User { get; set; }

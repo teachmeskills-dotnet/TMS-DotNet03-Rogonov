@@ -18,6 +18,11 @@ namespace AllQueez.Web.ViewModels
         public int ThemeId { get; set; }
 
         /// <summary>
+        /// Theme name
+        /// </summary>
+        public string ThemeName { get; set; }
+
+        /// <summary>
         /// Game title.
         /// </summary>
         public string Title { get; set; }

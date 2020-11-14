@@ -17,7 +17,6 @@
                 </div>
                 <div class="logout-btn">
                     <a asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt"></i></a>
-                    @*<a href="#"><i class="fas fa-sign-out-alt"></i></a>*@
                 </div>
             </div>
         </div>
@@ -52,9 +51,7 @@
         <div class="main-container">
             <div class="title-row">
                 <span class="title">My queezes</span>
-                <form asp-controller="game" asp-action="create">
-                    <button type="submit" class="create-btn" >Add game</button>
-                </form>
+                <a asp-controller="game" asp-action="create" class="create-btn">Add game</a>
             </div>
             <div class="search">
                 <i class="fas fa-search">
@@ -73,7 +70,7 @@
                         </a>
                         <div class="tile-title">@game.Title</div>
                         <div class="tile-description">
-                            @game.ThemeId
+                            @game.ThemeName
                         </div>
                         <div class="contents-bar">
                             <div class="rounds">
@@ -87,16 +84,16 @@
                             </div>
                         </div>
                         <div class="tile-date">
-                            <i class="far fa-calendar-alt"></i><span>@game.Date</span>
+                            <i class="far fa-calendar-alt"></i><span>@game.Date.Value.ToString("dd.MM.yyyy")</span>
                         </div>
                     </div>
                     @*<div>@game.Id</div>
-                <div>@game.Title</div>
-                <div>@game.ThemeId</div>
-                <div>@game.Date</div>
-                <form method="delete" asp-controller="Game" asp-action="Delete" asp-route-id="@game.Id">
-                    <button type="submit">Delete</button>
-                </form>*@
+                        <div>@game.Title</div>
+                        <div>@game.ThemeId</div>
+                        <div>@game.Date</div>
+                        <form method="delete" asp-controller="Game" asp-action="Delete" asp-route-id="@game.Id">
+                            <button type="submit">Delete</button>
+                        </form>*@
                 }
             </div>
         </div>

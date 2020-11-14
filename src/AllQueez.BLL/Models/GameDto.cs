@@ -21,7 +21,9 @@ namespace AllQueez.BLL.Models
         /// Theme Id.
         /// </summary>
         public int ThemeId { get; set; }
-                
+
+        public string ThemeName { get; set; }
+
         /// <summary>
         /// Game title.
         /// </summary>

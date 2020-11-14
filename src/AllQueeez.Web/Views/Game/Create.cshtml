@@ -4,26 +4,108 @@
     ViewData["Title"] = "Add Queez";
 }
 
-<h1>Add new Queez</h1>
+<div asp-validation-summary="ModelOnly"></div>
+<div class="wrapper">
+    <div class="header">
+        <div class="header-menu">
+            <div class="title">All<span>Queez</span></div>
+            <div class="sidebar-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="logout-btn">
+                <a href="#"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar">
+        <div class="sidebar-menu">
+            <div class="profile">
+                <img src="~/images/1.jpg" alt="">
+                <p>Tkumwa</p>
+            </div>
+            <li class="active-item">
+                <a href="#" class="menu-btn">
+                    <i class="fas fa-columns"></i><span>My queezes</span>
+                </a>
+            </li>
+            <li class="item">
+                <a href="#" class="menu-btn">
+                    <i class="fas fa-star"></i><span>Themes</span>
+                </a>
+            </li>
+            <li class="item">
+                <a href="#" class="menu-btn">
+                    <i class="fas fa-question"></i><span>Questions</span>
+                </a>
+            </li>
+            <li class="item">
+                <a href="#" class="menu-btn">
+                    <i class="fas fa-cog"></i><span>Settings</span>
+                </a>
+            </li>
+        </div>
+    </div>
+    <div class="main-container">
+        <form method="post" asp-controller="Game" asp-action="Create">
+            <div class="title-row">
+                <span class="title">Add queez</span>
+                <button type="submit" class="save">Save</button>
+            </div>
+            <div class="content">
+                <div class="create-form">
+                    <div class="form-row">
+                        <label for="theme" class="field-title">Select theme or create a new one:</label>
+                        <div class="select-container">
+                            <div class="select">
+                                <select class="field" asp-for="ThemeId" asp-items="ViewBag.Themes"></select>
+                                <button type="button" class="add-new-theme-btn" data-toggle="modal">
+                                    <i class="fas fa-plus-circle fa-2x"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label class="field-title" asp-for="Title">Game title:</label>
+                        <div class="field">
+                            <input class="field" placeholder="Game title" asp-for="Title">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="game-date" class="field-title" asp-for="Date">Game date:</label>
+                        <div class="date">
+                            <input class="field" placeholder="Select date" onfocus="(this.type='date')" onblur="(this.type='text')" asp-for="Date">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
-<form method="post" asp-controller="Game" asp-action="Create">
-    <div asp-validation-summary="ModelOnly"></div>
-    <div>
-        <select asp-for="ThemeName" asp-items="ViewBag.Themes"></select>
-        <label asp-for="ThemeName"></label><br />
-        <span asp-validation-for="ThemeName"></span>
-    </div>
-    <div>
-        <label asp-for="Title"></label><br />
-        <input asp-for="Title" />
-        <span asp-validation-for="Title"></span>
-    </div>
-    <div>
-        <label asp-for="Date"></label><br />
-        <input asp-for="Date" type="date" />
-        <span asp-validation-for="Date"></span>
-    </div>
-    <div>
-        <button type="submit">Add</button>
-    </div>
-</form>
+@*<h1>Add new Queez</h1>
+
+    <form method="post" asp-controller="Game" asp-action="Create">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div>
+            <select asp-for="ThemeId" asp-items="ViewBag.Themes"></select>
+            <label asp-for="ThemeId"></label><br />
+            <span asp-validation-for="ThemeId"></span>
+        </div>
+        <div>
+            <label asp-for="Title"></label><br />
+            <input asp-for="Title" />
+            <span asp-validation-for="Title"></span>
+        </div>
+        <div>
+            <label asp-for="Date"></label><br />
+            <input asp-for="Date" type="date" />
+            <span asp-validation-for="Date"></span>
+        </div>
+        <div>
+            <button type="submit">Add</button>
+        </div>
+    </form>*@
+
+@section css {
+    <link href="~/css/createGame.css" rel="stylesheet" />
+}
