@@ -27,6 +27,7 @@ namespace AllQueez.BLL.Managers
                 UserId = gameDto.UserId,
                 ThemeId = gameDto.ThemeId,
                 Title = gameDto.Title,
+                Description = gameDto.Description,
                 Date = gameDto.Date
             };
 
@@ -58,36 +59,13 @@ namespace AllQueez.BLL.Managers
                     ThemeId = game.ThemeId,
                     ThemeName = game.Theme.Name,
                     Title = game.Title,
+                    Description = game.Description,
                     Date = game.Date
                 });
             }
 
             return gameDtos;
         }
-
-        //public async Task<IEnumerable<GameDto>> GetGameByThemeIdAsync(int themeId)
-        //{
-        //    var games = await _repositoryGame
-        //        .GetAll()
-        //        .AsNoTracking()
-        //        .Where(game => game.ThemeId == themeId)
-        //        .ToListAsync();
-
-        //    var gameDtos = new List<GameDto>();
-        //    foreach (var game in games)
-        //    {
-        //        gameDtos.Add(new GameDto
-        //        {
-        //            Id = game.Id,
-        //            UserId = game.UserId,
-        //            ThemeId = game.ThemeId,
-        //            Title = game.Title,
-        //            Date = game.Date
-        //        });
-        //    }
-
-        //    return gameDtos;
-        //}
 
         public async Task DeleteAsync(int id, string userId)
         {

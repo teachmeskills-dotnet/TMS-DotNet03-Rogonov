@@ -4,6 +4,7 @@ using AllQueez.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -38,6 +39,7 @@ namespace AllQueez.Web.Controllers
                     ThemeId = gameDto.ThemeId,
                     ThemeName = gameDto.ThemeName,
                     Title = gameDto.Title,
+                    Description = gameDto.Description,
                     Date = gameDto.Date
                 });
             }
@@ -68,7 +70,8 @@ namespace AllQueez.Web.Controllers
                     UserId = userId,
                     ThemeId = model.ThemeId,
                     Title = model.Title,
-                    Date = model.Date
+                    Description = model.Description,
+                    Date = model.Date.HasValue ? model.Date : DateTime.Now
                 };
 
                 await _gameManager.CreateAsync(gameDto);

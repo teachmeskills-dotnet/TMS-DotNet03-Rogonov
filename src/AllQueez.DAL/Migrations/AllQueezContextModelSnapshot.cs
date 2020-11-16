@@ -29,6 +29,10 @@ namespace AllQueez.DAL.Migrations
                     b.Property<DateTime?>("Date")
                         .HasColumnType("date");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(511)")
+                        .HasMaxLength(511);
+
                     b.Property<int>("ThemeId")
                         .HasColumnType("int");
 

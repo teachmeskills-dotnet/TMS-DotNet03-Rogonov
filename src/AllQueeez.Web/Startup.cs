@@ -54,6 +54,7 @@ namespace AllQueez.Web
             {
                 config.Cookie.Name = "AllQueez.Cookie";
             });
+            services.AddRazorPages().AddRazorRuntimeCompilation();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

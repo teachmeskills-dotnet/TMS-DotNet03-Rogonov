@@ -55,7 +55,7 @@ namespace AllQueez.Web.Controllers
                     };
 
                     await _signInManager.SignInAsync(user, false);
-                    return RedirectToAction("App", "Home");
+                    return RedirectToAction("Index", "Game");
                 }
 
                 foreach (var error in result.Errors)

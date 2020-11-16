@@ -3,10 +3,22 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AllQueez.DAL.Migrations
 {
-    public partial class Initial : Migration
+    public partial class AllQueez : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "game");
+
+            migrationBuilder.EnsureSchema(
+                name: "question");
+
+            migrationBuilder.EnsureSchema(
+                name: "round");
+
+            migrationBuilder.EnsureSchema(
+                name: "theme");
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -152,6 +164,114 @@ namespace AllQueez.DAL.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Questions",
+                schema: "question",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(maxLength: 127, nullable: false),
+                    Description = table.Column<string>(maxLength: 511, nullable: true),
+                    Comment = table.Column<string>(maxLength: 255, nullable: true),
+                    File = table.Column<string>(maxLength: 63, nullable: true),
+                    Path = table.Column<string>(maxLength: 255, nullable: true),
+                    Answer = table.Column<string>(maxLength: 511, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Questions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Questions_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Themes",
+                schema: "theme",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 127, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Themes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Themes_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Games",
+                schema: "game",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(nullable: true),
+                    ThemeId = table.Column<int>(nullable: false),
+                    Title = table.Column<string>(maxLength: 127, nullable: false),
+                    Description = table.Column<string>(maxLength: 511, nullable: true),
+                    Date = table.Column<DateTime>(type: "date", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Games", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Games_Themes_ThemeId",
+                        column: x => x.ThemeId,
+                        principalSchema: "theme",
+                        principalTable: "Themes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Games_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Rounds",
+                schema: "round",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(nullable: true),
+                    GameId = table.Column<int>(nullable: false),
+                    Title = table.Column<string>(maxLength: 127, nullable: false),
+                    Type = table.Column<string>(maxLength: 127, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Rounds", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Rounds_Games_GameId",
+                        column: x => x.GameId,
+                        principalSchema: "game",
+                        principalTable: "Games",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Rounds_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -190,6 +310,42 @@ namespace AllQueez.DAL.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Games_ThemeId",
+                schema: "game",
+                table: "Games",
+                column: "ThemeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Games_UserId",
+                schema: "game",
+                table: "Games",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Questions_UserId",
+                schema: "question",
+                table: "Questions",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Rounds_GameId",
+                schema: "round",
+                table: "Rounds",
+                column: "GameId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Rounds_UserId",
+                schema: "round",
+                table: "Rounds",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Themes_UserId",
+                schema: "theme",
+                table: "Themes",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -210,7 +366,23 @@ namespace AllQueez.DAL.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Questions",
+                schema: "question");
+
+            migrationBuilder.DropTable(
+                name: "Rounds",
+                schema: "round");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Games",
+                schema: "game");
+
+            migrationBuilder.DropTable(
+                name: "Themes",
+                schema: "theme");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

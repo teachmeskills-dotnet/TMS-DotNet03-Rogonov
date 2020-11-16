@@ -18,6 +18,11 @@ namespace AllQueez.Web.ViewModels
         public string Title { get; set; }
 
         /// <summary>
+        /// Game description.
+        /// </summary>
+        public string Description { get; set; }
+
+        /// <summary>
         /// Game date.
         /// </summary>
         public DateTime? Date { get; set; }

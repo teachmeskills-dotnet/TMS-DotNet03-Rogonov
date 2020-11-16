@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AllQueez.DAL.Migrations
 {
     [DbContext(typeof(AllQueezContext))]
-    [Migration("20201013220010_RoundsTableAdded")]
-    partial class RoundsTableAdded
+    [Migration("20201114142449_AllQueez")]
+    partial class AllQueez
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,6 +31,10 @@ namespace AllQueez.DAL.Migrations
                     b.Property<DateTime?>("Date")
                         .HasColumnType("date");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(511)")
+                        .HasMaxLength(511);
+
                     b.Property<int>("ThemeId")
                         .HasColumnType("int");
 
@@ -49,6 +53,49 @@ namespace AllQueez.DAL.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Games","game");
+                });
+
+            modelBuilder.Entity("AllQueez.DAL.Entities.Question", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Answer")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(511)")
+                        .HasMaxLength(511);
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(255);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(511)")
+                        .HasMaxLength(511);
+
+                    b.Property<string>("File")
+                        .HasColumnType("nvarchar(63)")
+                        .HasMaxLength(63);
+
+                    b.Property<string>("Path")
+                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(255);
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(127)")
+                        .HasMaxLength(127);
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Questions","question");
                 });
 
             modelBuilder.Entity("AllQueez.DAL.Entities.Round", b =>
@@ -311,6 +358,14 @@ namespace AllQueez.DAL.Migrations
 
                     b.HasOne("AllQueez.DAL.Entities.User", "User")
                         .WithMany("Games")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("AllQueez.DAL.Entities.Question", b =>
+                {
+                    b.HasOne("AllQueez.DAL.Entities.User", "User")
+                        .WithMany("Questions")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
