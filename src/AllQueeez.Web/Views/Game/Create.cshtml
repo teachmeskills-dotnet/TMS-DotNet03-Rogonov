@@ -48,27 +48,23 @@
         </div>
     </div>
     <div class="main-container">
-        <div class="title-row">
-            <span class="title">Add queez</span>
-            <button type="submit" class="save">Save</button>
-        </div>
-        <div class="content">
-            <form method="post" asp-controller="Game" asp-action="Create">
+        <form method="post" asp-controller="Game" asp-action="Create">
+            <div class="title-row">
+                <span class="title">Add queez</span>
+                <button type="submit" class="save">Save</button>
+            </div>
+            <div class="content">
                 <div class="create-form">
                     <div class="form-row">
                         <label for="theme" class="field-title">Select theme or create a new one:</label>
                         <div class="select-container">
                             <div class="select-block">
                                 <select class="select" asp-for="ThemeId" asp-items="ViewBag.Themes"></select>
-                            </div>
-                            <div class="dropdown-icon">
                                 <i class="fas fa-caret-down"></i>
-                            </div>
-                            <div>
-                                <button onclick="addTheme()" type="button" class="add-new-theme-btn" data-toggle="modal">
-                                    <i class="fas fa-plus-circle fa-2x"></i>
-                                </button>
-                            </div>
+                            </div> 
+                            <button onclick="addTheme()" type="button" class="add-new-theme-btn" data-toggle="modal">
+                                <i class="fas fa-plus-circle fa-2x"></i>
+                            </button>
                         </div>
                     </div>
                     <div class="form-row">
@@ -96,8 +92,7 @@
                         </div>
                     </div>
                 </div>
-            </form>
-            <form method="post" asp-controller="Theme" asp-action="Create">
+                @*<form method="post" asp-controller="Theme" asp-action="Create">*@
                 <div id="add-theme-modal" class="add-theme-modal">
                     <div class="modal-content">
                         <div class="modal-title">Add new theme</div>
@@ -116,8 +111,9 @@
                         </div>
                     </div>
                 </div>
-            </form>
-        </div>
+                @*</form>*@
+            </div>
+        </form>
     </div>
 </div>
 
