@@ -1,4 +1,4 @@
-﻿using AllQueez.Common.Interfaces;
+﻿using AllQueez.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 
@@ -39,6 +39,11 @@ namespace AllQueez.DAL.Entities
         /// Game title.
         /// </summary>
         public string Title { get; set; }
+
+        /// <summary>
+        /// Game description.
+        /// </summary>
+        public string Description { get; set; }
 
         /// <summary>
         /// Game date.

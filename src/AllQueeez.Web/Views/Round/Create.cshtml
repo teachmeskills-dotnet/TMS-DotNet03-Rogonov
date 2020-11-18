@@ -1,0 +1,29 @@
+﻿@model RoundActionsViewModel
+
+@{
+    ViewData["Title"] = "Add round";
+}
+
+<h1>Add new round</h1>
+
+<form method="post" asp-controller="Round" asp-action="Create">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div>
+        <select asp-for="GameId" asp-items="ViewBag.Games"></select>
+        <label asp-for="GameId"></label><br />
+        <span asp-validation-for="GameId"></span>
+    </div>
+    <div>
+        <label asp-for="Title"></label><br />
+        <input asp-for="Title" />
+        <span asp-validation-for="Title"></span>
+    </div>
+    <div>
+        <label asp-for="Type"></label><br />
+        <input asp-for="Type" />
+        <span asp-validation-for="Type"></span>
+    </div>
+    <div>
+        <button type="submit">Add</button>
+    </div>
+</form>

@@ -1,0 +1,52 @@
+﻿@*@{
+    ViewData["Title"] = "App";
+}
+
+<div class="wrapper">
+    <div class="header">
+        <div class="header-menu">
+            <div class="title">All<span>Queez</span></div>
+            <div class="sidebar-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="logout-btn">
+                <a asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar">
+        <div class="sidebar-menu">
+            <div class="profile">
+                <img src="~/images/1.jpg" alt="">
+                <p>Tkumwa</p>
+            </div>
+            <ul>
+                <li class="item">
+                    <a href="#" class="menu-btn">
+                        <i class="fas fa-columns"></i><span>My queezes</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="#" class="menu-btn">
+                        <i class="fas fa-star"></i><span>Themes</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="#" class="menu-btn">
+                        <i class="fas fa-question"></i><span>Questions</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="#" class="menu-btn">
+                        <i class="fas fa-cog"></i><span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-container"></div>
+</div>
+
+@section css {
+    <link href="~/css/app.css" rel="stylesheet" />
+}*@

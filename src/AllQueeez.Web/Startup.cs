@@ -1,15 +1,14 @@
+using AllQueez.BLL.Interfaces;
 using AllQueez.BLL.Managers;
-using AllQueez.Common.Interfaces;
+using AllQueez.BLL.Repository;
 using AllQueez.DAL.Context;
 using AllQueez.DAL.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace AllQueez.Web
 {
@@ -24,15 +23,38 @@ namespace AllQueez.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IAccountManager, AccountManager>();
+            // Repository pattern (Generic)
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
+            // Managers
+            services.AddScoped<IAccountManager, AccountManager>();
+            services.AddScoped<IThemeManager, ThemeManager>();
+            services.AddScoped<IGameManager, GameManager>();
+            services.AddScoped<IRoundManager, RoundManager>();
+            services.AddScoped<IQuestionManager, QuestionManager>();
+
+            // Database context
             services.AddDbContext<AllQueezContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("AllQueezConnection")));
 
-            services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<AllQueezContext>();
+            // ASP.NET Core Identity
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireDigit = true;
+            })
+                .AddEntityFrameworkStores<DAL.Context.AllQueezContext>();
 
+            // Microsoft services
             services.AddControllersWithViews();
+            services.ConfigureApplicationCookie(config =>
+            {
+                config.Cookie.Name = "AllQueez.Cookie";
+            });
+            services.AddRazorPages().AddRazorRuntimeCompilation();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

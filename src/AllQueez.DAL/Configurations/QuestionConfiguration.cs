@@ -33,7 +33,6 @@ namespace AllQueez.DAL.Configurations
                 .HasMaxLength(ConfigurationConstants.SqlMaxLengthShort);
 
             builder.Property(question => question.Path)
-                .IsRequired()
                 .HasMaxLength(ConfigurationConstants.SqlMaxLengthLong);
 
             builder.Property(question => question.Answer)

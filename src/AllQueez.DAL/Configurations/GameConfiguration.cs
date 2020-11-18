@@ -23,6 +23,9 @@ namespace AllQueez.DAL.Configurations
                 .IsRequired()
                 .HasMaxLength(ConfigurationConstants.SqlMaxLengthMedium);
 
+            builder.Property(game => game.Description)
+                .HasMaxLength(ConfigurationConstants.SqlMaxLengthTextarea);
+
             builder.Property(theme => theme.Date)
                 .HasColumnType(ConfigurationConstants.SqlDateFormat);
 

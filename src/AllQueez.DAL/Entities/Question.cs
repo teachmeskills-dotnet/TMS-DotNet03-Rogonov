@@ -1,4 +1,4 @@
-﻿using AllQueez.Common.Interfaces;
+﻿using AllQueez.DAL.Interfaces;
 using System.Collections.Generic;
 
 namespace AllQueez.DAL.Entities
@@ -48,10 +48,5 @@ namespace AllQueez.DAL.Entities
         /// Answer.
         /// </summary>
         public string Answer { get; set; }
-
-        /// <summary>
-        /// Navigation to Round questions.
-        /// </summary>
-        public ICollection<RoundQuestion> RoundQuestions { get; set; }
     }
 }

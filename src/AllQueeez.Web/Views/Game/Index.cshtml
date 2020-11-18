@@ -1,0 +1,102 @@
+﻿@model IEnumerable<GamesViewModel>
+
+@{
+    ViewData["Title"] = "Queezes";
+}
+
+<div class="wrapper">
+    <div class="header">
+        <div class="header-menu">
+            <div class="title">All<span>Queez</span></div>
+            <div class="sidebar-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="logout-btn">
+                <a asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar">
+        <div class="sidebar-menu">
+            <div class="profile">
+                <img src="~/images/1.jpg" alt="">
+                <p>Tkumwa</p>
+            </div>
+            <ul>
+                <li class="active-item">
+                    <a href="#" class="menu-btn">
+                        <i class="fas fa-columns"></i><span>My queezes</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="#" class="menu-btn">
+                        <i class="fas fa-star"></i><span>Themes</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="#" class="menu-btn">
+                        <i class="fas fa-question"></i><span>Questions</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="#" class="menu-btn">
+                        <i class="fas fa-cog"></i><span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-container">
+        <div class="title-row">
+            <span class="title">My queezes</span>
+            <a asp-controller="game" asp-action="create" class="create-btn">Add game</a>
+        </div>
+        <div class="search">
+            <i class="fas fa-search">
+                <input type="text"
+                       placeholder="Type in your game title"
+                       onfocus="this.placeholder = ''"
+                       onblur="this.placeholder = 'Type in your game title'">
+            </i>
+        </div>
+        <div class="tiles">
+            @foreach (var game in Model)
+            {
+                <div class="tile">
+                    <div class="tile-menu-dropdown">
+                        <button class="tile-menu-btn">
+                            <i class="fas fa-ellipsis-v fa-2x" style="pointer-events: none;"></i>
+                        </button>
+                        <div id="tile-menu" class="tile-menu-content">
+                            <a href="#">View</a>
+                            <a href="#">Edit</a>
+                            <a asp-controller="game" asp-action="delete" asp-route-id="@game.Id">Delete</a>
+                        </div>
+                    </div>
+                    <div class="tile-title">@game.Title</div>
+                    <div class="tile-description">
+                        @game.Description
+                    </div>
+                    <div class="contents-bar">
+                        <div class="rounds">
+                            <i class="far fa-list-alt fa-4x"></i><p>7 Rounds</p>
+                        </div>
+                        <div class="questions">
+                            <i class="far fa-question-circle fa-5x"></i><p>38 Questions</p>
+                        </div>
+                        <div class="timer">
+                            <i class="far fa-clock fa-3x"></i><p>2 Hours</p>
+                        </div>
+                    </div>
+                    <div class="tile-date">
+                        <i class="far fa-calendar-alt"></i><span>@game.Date.Value.ToString("dd.MM.yyyy")</span>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section css {
+    <link href="~/css/games.css" rel="stylesheet" />
+}
