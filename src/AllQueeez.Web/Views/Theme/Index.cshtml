@@ -12,7 +12,7 @@
     {
         <div>@theme.Id</div>
         <div>@theme.Name</div>
-        <form method="delete" asp-controller="Theme" asp-action="Delete" asp-route-id="@theme.Id">
+        <form asp-controller="Theme" asp-action="Delete" asp-route-id="@theme.Id">
             <button type="submit">Delete</button>
         </form>
     }

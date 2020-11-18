@@ -64,6 +64,26 @@ namespace AllQueez.Web.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateFromGame(ThemeActionsViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
+                var themeDto = new ThemeDto
+                {
+                    UserId = userId,
+                    Name = model.Name
+                };
+
+                await _themeManager.CreateAsync(themeDto);
+                return RedirectToAction("Create", "Game");
+            }
+
+            return View(model);
+        }
+
         public async Task<IActionResult> Delete(int id)
         {
             var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);

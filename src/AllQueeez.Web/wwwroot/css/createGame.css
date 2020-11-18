@@ -213,7 +213,7 @@ body {
     }
 
 .content {
-    position: relative;
+    position: absolute;
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -309,8 +309,8 @@ body {
     display: none;
     width: 330px;
     height: 150px;
-    margin-left: 450px;
-    margin-top: 60px;
+    margin-top: 80px;
+    margin-left: 460px;
     color: #ffffff;
     background-color: #2F323A;
     box-shadow: 0 0 10px 3px #ffffff;
@@ -318,7 +318,7 @@ body {
     padding: 15px;
     cursor: default;
     animation-name: animatetop;
-    animation-duration: 0.4s
+    animation-duration: 0.5s
 }
 
 @keyframes animatetop {
@@ -328,7 +328,7 @@ body {
     }
 
     to {
-        top: 20px;
+        top: 100px;
         opacity: 1
     }
 }
@@ -366,8 +366,8 @@ body {
     outline: none;
     border: none;
     border-bottom: 2px solid #cd42e9;
-    color: #bbbbbb;
-    font-size: 15px;
+    color: #ffffff;
+    font-size: 17px;
 }
 
 .buttons-row {

@@ -1,7 +1,7 @@
 ﻿namespace AllQueez.Web.ViewModels
 {
     /// <summary>
-    /// Themes list view model.
+    /// Themes view model.
     /// </summary>
     public class ThemesViewModel
     {

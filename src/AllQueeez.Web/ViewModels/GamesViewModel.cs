@@ -3,7 +3,7 @@
 namespace AllQueez.Web.ViewModels
 {
     /// <summary>
-    /// Games list view model.
+    /// Games view model.
     /// </summary>
     public class GamesViewModel
     {
@@ -18,7 +18,7 @@ namespace AllQueez.Web.ViewModels
         public int ThemeId { get; set; }
 
         /// <summary>
-        /// Theme name
+        /// Theme name.
         /// </summary>
         public string ThemeName { get; set; }
 
