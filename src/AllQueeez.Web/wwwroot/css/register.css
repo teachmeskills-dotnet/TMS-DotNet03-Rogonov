@@ -26,7 +26,7 @@ body {
 .background {
     border-radius: 5%;
     width: 320px;
-    height: 400px;
+    height: 420px;
     position: absolute;
     top: 40%;
     bottom: 60%;
@@ -92,3 +92,23 @@ body {
     .btn:hover {
         border-color: #672275;
     }
+
+.register {
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+    .register span {
+        margin-left: 5px;
+    }
+
+        .register span a {
+            color: #a39e9e;
+            text-decoration: none;
+            transition: 0.3s;
+            transition-property: color;
+        }
+
+            .register span a:hover {
+                color: #ffffff;
+            }

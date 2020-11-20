@@ -4,16 +4,71 @@
     ViewData["Title"] = "Add theme";
 }
 
-<h1>Add new theme</h1>
+<div class="wrapper">
+    <div class="header">
+        <div class="header-menu">
+            <div class="title">All<span>Queez</span></div>
+            <div class="sidebar-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="logout-btn">
+                <a asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar">
+        <div class="sidebar-menu">
+            <div class="profile">
+                <img src="~/images/1.jpg" alt="">
+                <p>Tkumwa</p>
+            </div>
+            <ul>
+                <li class="item">
+                    <a href="/game" class="menu-btn">
+                        <i class="fas fa-columns"></i><span>My queezes</span>
+                    </a>
+                </li>
+                <li class="active-item">
+                    <a href="/theme" class="menu-btn">
+                        <i class="fas fa-star"></i><span>Themes</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="/question" class="menu-btn">
+                        <i class="fas fa-question"></i><span>Questions</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="#" class="menu-btn">
+                        <i class="fas fa-cog"></i><span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-container">
+        <form method="post" asp-controller="theme" asp-action="Create">
+            <div class="title-row">
+                <span class="title">Add theme</span>
+                <button type="submit" class="save">Save</button>
+            </div>
+            <div class="content">
+                <div class="create-form">                    
+                    <div class="form-row">
+                        <label class="field-title">Game title:</label>
+                        <div>
+                            <input class="field"
+                                   placeholder="Theme name"
+                                   onfocus="this.placeholder = ''"
+                                   onblur="this.placeholder = 'Theme name'" asp-for="Name">
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
-<form method="post" asp-controller="Theme" asp-action="Create">
-    <div asp-validation-summary="ModelOnly"></div>
-    <div>
-        <label asp-for="Name"></label><br />
-        <input asp-for="Name" />
-        <span asp-validation-for="Name"></span>
-    </div>
-    <div>
-        <button type="submit">Add</button>
-    </div>
-</form>
+@section css {
+    <link href="~/css/create.css" rel="stylesheet" />
+}

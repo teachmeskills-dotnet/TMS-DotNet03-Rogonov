@@ -4,7 +4,6 @@
     ViewData["Title"] = "Add Queez";
 }
 
-@*<div asp-validation-summary="ModelOnly"></div>*@
 <div class="wrapper">
     <div class="header">
         <div class="header-menu">
@@ -25,17 +24,17 @@
             </div>
             <ul>
                 <li class="active-item">
-                    <a href="#" class="menu-btn">
+                    <a href="/game" class="menu-btn">
                         <i class="fas fa-columns"></i><span>My queezes</span>
                     </a>
                 </li>
                 <li class="item">
-                    <a href="#" class="menu-btn">
+                    <a href="/theme" class="menu-btn">
                         <i class="fas fa-star"></i><span>Themes</span>
                     </a>
                 </li>
                 <li class="item">
-                    <a href="#" class="menu-btn">
+                    <a href="/question" class="menu-btn">
                         <i class="fas fa-question"></i><span>Questions</span>
                     </a>
                 </li>
@@ -65,7 +64,6 @@
                             <button onclick="addTheme()" type="button" class="add-new-theme-btn" data-toggle="modal">
                                 <i class="fas fa-plus-circle fa-2x"></i>
                             </button>
-
                         </div>
                     </div>
                     <div class="form-row">
@@ -102,9 +100,9 @@
 </div>
 
 @section css {
-    <link href="~/css/createGame.css" rel="stylesheet" />
+    <link href="~/css/create.css" rel="stylesheet" />
 }
 
 @section js {
-    <script src="~/js/createGame.js"></script>
+    <script src="~/js/create.js"></script>
 }
