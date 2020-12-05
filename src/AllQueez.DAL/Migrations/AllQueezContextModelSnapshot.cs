@@ -15,31 +15,31 @@ namespace AllQueez.DAL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.8")
+                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "5.0.0");
 
             modelBuilder.Entity("AllQueez.DAL.Entities.Game", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime?>("Date")
                         .HasColumnType("date");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(511)")
-                        .HasMaxLength(511);
+                        .HasMaxLength(511)
+                        .HasColumnType("nvarchar(511)");
 
                     b.Property<int>("ThemeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(127)")
-                        .HasMaxLength(127);
+                        .HasMaxLength(127)
+                        .HasColumnType("nvarchar(127)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -50,7 +50,7 @@ namespace AllQueez.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Games","game");
+                    b.ToTable("Games", "game");
                 });
 
             modelBuilder.Entity("AllQueez.DAL.Entities.Question", b =>
@@ -58,33 +58,33 @@ namespace AllQueez.DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("Answer")
                         .IsRequired()
-                        .HasColumnType("nvarchar(511)")
-                        .HasMaxLength(511);
+                        .HasMaxLength(511)
+                        .HasColumnType("nvarchar(511)");
 
                     b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(511)")
-                        .HasMaxLength(511);
+                        .HasMaxLength(511)
+                        .HasColumnType("nvarchar(511)");
 
                     b.Property<string>("File")
-                        .HasColumnType("nvarchar(63)")
-                        .HasMaxLength(63);
+                        .HasMaxLength(63)
+                        .HasColumnType("nvarchar(63)");
 
                     b.Property<string>("Path")
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(127)")
-                        .HasMaxLength(127);
+                        .HasMaxLength(127)
+                        .HasColumnType("nvarchar(127)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -93,7 +93,7 @@ namespace AllQueez.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Questions","question");
+                    b.ToTable("Questions", "question");
                 });
 
             modelBuilder.Entity("AllQueez.DAL.Entities.Round", b =>
@@ -101,31 +101,21 @@ namespace AllQueez.DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<int>("GameId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(127)")
-                        .HasMaxLength(127);
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(127)")
-                        .HasMaxLength(127);
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(127)
+                        .HasColumnType("nvarchar(127)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("GameId");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Rounds","round");
+                    b.ToTable("Rounds", "round");
                 });
 
             modelBuilder.Entity("AllQueez.DAL.Entities.Theme", b =>
@@ -133,12 +123,12 @@ namespace AllQueez.DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(127)")
-                        .HasMaxLength(127);
+                        .HasMaxLength(127)
+                        .HasColumnType("nvarchar(127)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -147,7 +137,7 @@ namespace AllQueez.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Themes","theme");
+                    b.ToTable("Themes", "theme");
                 });
 
             modelBuilder.Entity("AllQueez.DAL.Entities.User", b =>
@@ -163,8 +153,8 @@ namespace AllQueez.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
@@ -176,12 +166,12 @@ namespace AllQueez.DAL.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -199,17 +189,17 @@ namespace AllQueez.DAL.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
+                        .HasDatabaseName("EmailIndex");
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex")
+                        .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
@@ -225,18 +215,18 @@ namespace AllQueez.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex")
+                        .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
@@ -247,7 +237,7 @@ namespace AllQueez.DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -271,7 +261,7 @@ namespace AllQueez.DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -358,6 +348,10 @@ namespace AllQueez.DAL.Migrations
                         .WithMany("Games")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Theme");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("AllQueez.DAL.Entities.Question", b =>
@@ -366,6 +360,8 @@ namespace AllQueez.DAL.Migrations
                         .WithMany("Questions")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("AllQueez.DAL.Entities.Round", b =>
@@ -376,10 +372,7 @@ namespace AllQueez.DAL.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("AllQueez.DAL.Entities.User", "User")
-                        .WithMany("Rounds")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                    b.Navigation("Game");
                 });
 
             modelBuilder.Entity("AllQueez.DAL.Entities.Theme", b =>
@@ -388,6 +381,8 @@ namespace AllQueez.DAL.Migrations
                         .WithMany("Themes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -439,6 +434,25 @@ namespace AllQueez.DAL.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("AllQueez.DAL.Entities.Game", b =>
+                {
+                    b.Navigation("Rounds");
+                });
+
+            modelBuilder.Entity("AllQueez.DAL.Entities.Theme", b =>
+                {
+                    b.Navigation("Games");
+                });
+
+            modelBuilder.Entity("AllQueez.DAL.Entities.User", b =>
+                {
+                    b.Navigation("Games");
+
+                    b.Navigation("Questions");
+
+                    b.Navigation("Themes");
                 });
 #pragma warning restore 612, 618
         }

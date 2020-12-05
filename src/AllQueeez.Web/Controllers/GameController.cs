@@ -17,12 +17,14 @@ namespace AllQueez.Web.Controllers
         private readonly IAccountManager _accountManager;
         private readonly IGameManager _gameManager;
         private readonly IThemeManager _themeManager;
+        private readonly IQuestionManager _questionManager;
 
-        public GameController(IAccountManager accountManager, IGameManager gameManager, IThemeManager themeManager)
+        public GameController(IAccountManager accountManager, IGameManager gameManager, IThemeManager themeManager, IQuestionManager questionManager)
         {
-            _accountManager = accountManager ?? throw new System.ArgumentNullException(nameof(accountManager));
-            _gameManager = gameManager ?? throw new System.ArgumentNullException(nameof(gameManager));
-            _themeManager = themeManager ?? throw new System.ArgumentNullException(nameof(themeManager));
+            _accountManager = accountManager ?? throw new ArgumentNullException(nameof(accountManager));
+            _gameManager = gameManager ?? throw new ArgumentNullException(nameof(gameManager));
+            _themeManager = themeManager ?? throw new ArgumentNullException(nameof(themeManager));
+            _questionManager = questionManager ?? throw new ArgumentNullException(nameof(questionManager));
         }
 
         public async Task<IActionResult> Index()
@@ -79,6 +81,39 @@ namespace AllQueez.Web.Controllers
             }
 
             return View(model);
+        }
+
+        //[HttpGet]
+        //public async Task<IActionResult> GameContent()
+        //{
+        //    var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
+        //    var questions = (await _questionManager.GetQuestionByUserIdAsync(userId)).Select(q => new { q.Id, q.Description }).ToList();
+        //    questions.Insert(0, new { Id = 0, Description = "Question description" });
+        //    ViewBag.Questions = new SelectList(questions, "Id", "Description");
+
+        //    return View();
+        //}
+
+        [HttpGet]
+        public async Task<IActionResult> GameContent(int id)
+        {
+            var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
+            var gameDto = await _gameManager.GetGameAsync(id, userId);
+
+            var gameViewModel = new GameRoundsViewModel
+            {
+                Id = gameDto.Id,
+                ThemeName = gameDto.ThemeName,
+                Title = gameDto.Title,
+                Description = gameDto.Description,
+                Date = gameDto.Date
+            };
+
+            var questions = (await _questionManager.GetQuestionByUserIdAsync(userId)).Select(q => new { q.Id, q.Description }).ToList();
+            questions.Insert(0, new { Id = 0, Description = "Question description" });
+            ViewBag.Questions = new SelectList(questions, "Id", "Description");
+
+            return View(gameViewModel);
         }
 
         public async Task<IActionResult> Delete(int id)

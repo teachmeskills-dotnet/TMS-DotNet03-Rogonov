@@ -7,19 +7,26 @@ function closeForm() {
 }
 
 function duplicateRound() {
-    var original = document.getElementsByClassName('round-template');
-    var i = document.getElementsByClassName('round-template').length;
-    var clone = original[i - 1].cloneNode(true);
-    clone.querySelector('.round-name-field').value = '';
-    var questionCount = clone.getElementsByClassName('another-question').length;
-    for (var q = 0; q < questionCount - 1; q++) {
-        var question = clone.getElementsByClassName('another-question');
-        question[0].parentNode.removeChild(question[0]);
-    }
-    original[i - 1].parentNode.appendChild(clone);
-    document.getElementsByClassName('remove-another-round-btn')[i - 1].style.display = "block";
-    var originalAddRound = document.getElementsByClassName('add-another-round-btn');
-    originalAddRound[0].parentNode.removeChild(originalAddRound[0]);
+    //var input = document.getElementsByClassName('round-name-field').value;
+    //if (!input == "") {
+        var original = document.getElementsByClassName('round-template');
+        var i = document.getElementsByClassName('round-template').length;
+        var clone = original[i - 1].cloneNode(true);
+        clone.querySelector('.round-name-field').value = '';
+        var questionCount = clone.getElementsByClassName('another-question').length;
+        for (var q = 0; q < questionCount - 1; q++) {
+            var question = clone.getElementsByClassName('another-question');
+            question[0].parentNode.removeChild(question[0]);
+        }
+        original[i - 1].parentNode.appendChild(clone);
+        document.getElementsByClassName('remove-another-round-btn')[i - 1].style.display = "block";
+        var originalAddRound = document.getElementsByClassName('add-another-round-btn');
+        originalAddRound[0].parentNode.removeChild(originalAddRound[0]);
+    //}
+    //else {
+    //    document.getElementsByClassName('input-alert').classList.toggle("show");
+    //    return false;
+    //}
 }
 
 function removeRound(e) {

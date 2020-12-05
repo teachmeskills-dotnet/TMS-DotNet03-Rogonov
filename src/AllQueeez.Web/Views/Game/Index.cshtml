@@ -68,7 +68,7 @@
                             <i class="fas fa-ellipsis-v fa-2x" style="pointer-events: none;"></i>
                         </button>
                         <div id="tile-menu" class="tile-menu-content">
-                            <a href="#">View</a>
+                            <a asp-controller="game" asp-action="GameContent" asp-route-id="@game.Id">Game content</a>
                             <a href="#">Edit</a>
                             <a asp-controller="game" asp-action="delete" asp-route-id="@game.Id">Delete</a>
                         </div>

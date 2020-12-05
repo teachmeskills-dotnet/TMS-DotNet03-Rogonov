@@ -22,18 +22,26 @@ namespace AllQueez.BLL.Interfaces
         /// <returns>List of Game data transfer objects.</returns>
         Task<IEnumerable<GameDto>> GetGameByUserIdAsync(string userId);
 
-        ///// <summary>
-        ///// Get game by theme identifier.
-        ///// </summary>
-        ///// <param name="id">Theme identifier.</param>
-        ///// <returns>Game.</returns>
-        //Task<IEnumerable<GameDto>> GetGameByThemeIdAsync(int themeId);
+        /// <summary>
+        /// Get game by identifier.
+        /// </summary>
+        /// <param name="id">Identifier.</param>
+        /// <param name="userId">User identifier.</param>
+        /// <returns>Game data transfer object.</returns>
+        Task<GameDto> GetGameAsync(int id, string userId);
+
+        /// <summary>
+        /// Get game idenifier by user identifier.
+        /// </summary>
+        /// <param name="userId">User identifier.</param>
+        /// <returns>Game identifier.</returns>
+        Task<int> GetGameIdByUserIdAsync(string userId);
 
         /// <summary>
         /// Delete game by user and game identifiers.
         /// </summary>
         /// <param name="id">Game identifier.</param>
-        /// <param name="userId">User identifier..</param>
+        /// <param name="userId">User identifier.</param>
         Task DeleteAsync(int id, string userId);
     }
 }

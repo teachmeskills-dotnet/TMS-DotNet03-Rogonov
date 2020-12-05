@@ -19,10 +19,5 @@
         /// Round title.
         /// </summary>
         public string Title { get; set; }
-
-        /// <summary>
-        /// Round type.
-        /// </summary>
-        public string Type { get; set; }
     }
 }

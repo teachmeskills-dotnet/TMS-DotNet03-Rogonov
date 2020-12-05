@@ -1,29 +1,147 @@
-﻿@model RoundActionsViewModel
+﻿@*@model RoundActionsViewModel
 
 @{
     ViewData["Title"] = "Add round";
 }
 
-<h1>Add new round</h1>
+<div class="wrapper">
+    <div class="header">
+        <div class="header-menu">
+            <div class="title">All<span>Queez</span></div>
+            <div class="sidebar-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="logout-btn">
+                <a asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar">
+        <div class="sidebar-menu">
+            <div class="profile">
+                <img src="~/images/1.jpg" alt="">
+                <p>Tkumwa</p>
+            </div>
+            <ul>
+                <li class="active-item">
+                    <a href="/game" class="menu-btn">
+                        <i class="fas fa-columns"></i><span>My queezes</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="/theme" class="menu-btn">
+                        <i class="fas fa-star"></i><span>Themes</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="/question" class="menu-btn">
+                        <i class="fas fa-question"></i><span>Questions</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="#" class="menu-btn">
+                        <i class="fas fa-cog"></i><span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-container">
+        <form method="post" asp-controller="Round" asp-action="Create">
+            <div class="title-row">
+                <span class="title">Queez contents</span>
+                <button type="submit" class="save">Save</button>
+            </div>
+            <div class="game-info"></div>
+            <div class="header-row">Rounds:</div>
+            <div class="rounds">
+                <div class="round-template">
+                    <div class="round-header">
+                        <div class="round-number"></div>
+                        <div class="round-name">
+                            <input type="text"
+                                   class="round-name-field"
+                                   placeholder="Enter Round name"
+                                   onfocus="this.placeholder=''"
+                                   onblur="this.placeholder='Enter Round name'">
+                        </div>
+                    </div>
+                    <table class="round-questions">
+                        <thead>
+                            <tr class="questions-header">
+                                <th width="5%" class="row-number">#</th>
+                                <th width="45%">Description</th>
+                                <th width="45%">Answer</th>
+                                <th width="5%"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="another-question">
+                                <td width="5%" class="row-number"></td>
+                                <td width="45%" class="select-block">
+                                    <select name="question" class="select-question-dropdown"></select>
+                                    <i class="fas fa-caret-down"></i>
+                                </td>
+                                <td width="45%">Answer</td>
+                                <td width="5%" class="question-btns">
+                                    <button class="add-another-question-btn" onclick="duplicateQuestion(this)" type="button">
+                                        <i class="fas fa-plus-circle fa-2x"></i>
+                                    </button>
+                                    <button class="remove-another-question-btn" onclick="removeQuestion(this)" type="button">
+                                        <i class="fas fa-minus-circle fa-2x"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="round-action-btns">
+                        <button class="add-another-round-btn" onclick="duplicateRound()" type="button">
+                            <i class="fas fa-plus fa-sm"></i>
+                        </button>
+                        <button class="remove-another-round-btn" onclick="removeRound(this)" type="button">
+                            <i class="fas fa-minus fa-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
-<form method="post" asp-controller="Round" asp-action="Create">
-    <div asp-validation-summary="ModelOnly"></div>
-    <div>
-        <select asp-for="GameId" asp-items="ViewBag.Games"></select>
-        <label asp-for="GameId"></label><br />
-        <span asp-validation-for="GameId"></span>
-    </div>
-    <div>
-        <label asp-for="Title"></label><br />
-        <input asp-for="Title" />
-        <span asp-validation-for="Title"></span>
-    </div>
-    <div>
-        <label asp-for="Type"></label><br />
-        <input asp-for="Type" />
-        <span asp-validation-for="Type"></span>
-    </div>
-    <div>
-        <button type="submit">Add</button>
-    </div>
-</form>
+@section css {
+    <link href="~/css/create.css" rel="stylesheet" />
+}
+
+@section js {
+    <script src="~/js/createGame.js"></script>
+}
+
+@model RoundActionsViewModel
+
+    @{
+        ViewData["Title"] = "Add round";
+    }
+
+    <h1>Add new round</h1>
+
+    <form method="post" asp-controller="Round" asp-action="Create">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div>
+            <select asp-for="GameId" asp-items="ViewBag.Games"></select>
+            <label asp-for="GameId"></label><br />
+            <span asp-validation-for="GameId"></span>
+        </div>
+        <div>
+            <label asp-for="Title"></label><br />
+            <input asp-for="Title" />
+            <span asp-validation-for="Title"></span>
+        </div>
+        <div>
+            <label asp-for="Type"></label><br />
+            <input asp-for="Type" />
+            <span asp-validation-for="Type"></span>
+        </div>
+        <div>
+            <button type="submit">Add</button>
+        </div>
+    </form>*@

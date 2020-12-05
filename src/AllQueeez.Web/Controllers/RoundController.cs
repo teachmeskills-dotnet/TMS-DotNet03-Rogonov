@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AllQueez.Web.Controllers
@@ -16,19 +17,22 @@ namespace AllQueez.Web.Controllers
     {
         private readonly IAccountManager _accountManager;
         private readonly IRoundManager _roundManager;
-        private readonly AllQueezContext _allQueezContext;
+        private readonly IGameManager _gameManager;
+        private readonly IQuestionManager _questionManager;
 
-        public RoundController(IAccountManager accountManager, IRoundManager roundManager, AllQueezContext allQueezContext)
+        public RoundController(IAccountManager accountManager, IRoundManager roundManager, IGameManager gameManager, IQuestionManager questionManager)
         {
             _accountManager = accountManager ?? throw new System.ArgumentNullException(nameof(accountManager));
             _roundManager = roundManager ?? throw new System.ArgumentNullException(nameof(roundManager));
-            _allQueezContext = allQueezContext ?? throw new System.ArgumentNullException(nameof(allQueezContext));        
+            _gameManager = gameManager ?? throw new System.ArgumentNullException(nameof(gameManager));
+            _questionManager = questionManager ?? throw new System.ArgumentNullException(nameof(questionManager));
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
         {
             var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
-            var roundDtos = await _roundManager.GetRoundByUserIdAsync(userId);
+            var gameId = await _gameManager.GetGameAsync(id, userId);
+            var roundDtos = await _roundManager.GetRoundByGameIdAsync(gameId.Id);
 
             var roundViewModels = new List<RoundsViewModel>();
             foreach (var roundDto in roundDtos)
@@ -36,9 +40,7 @@ namespace AllQueez.Web.Controllers
                 roundViewModels.Add(new RoundsViewModel
                 {
                     Id = roundDto.Id,
-                    GameId = roundDto.GameId,
-                    Title = roundDto.Title,
-                    Type = roundDto.Type
+                    Title = roundDto.Title
                 });
             }
 
@@ -46,38 +48,43 @@ namespace AllQueez.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> AddRound()
         {
+            var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
+            var questions = (await _questionManager.GetQuestionByUserIdAsync(userId)).Select(q => new { q.Id, q.Description }).ToList();
+            questions.Insert(0, new { Id = 0, Description = "Question description" });
+            ViewBag.Questions = new SelectList(questions, "Id", "Description");
+
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(RoundActionsViewModel model)
+        public async Task<IActionResult> Create(int id, RoundActionsViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
+                var gameId = await _gameManager.GetGameAsync(id, userId);
                 var roundDto = new RoundDto
                 {
-                    UserId = userId,
-                    GameId = model.GameId,
+                    GameId = gameId.Id,
+                    QuestionId = model.QuestionId,
                     Title = model.Title,
-                    Type = model.Type
                 };
 
                 await _roundManager.CreateAsync(roundDto);
-                return RedirectToAction("Index", "Round");
+                return Redirect($"/game/gameContent/{id}");
             }
 
             return View(model);
         }
 
-        public async Task<IActionResult> Delete(int id)
-        {
-            var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
-            await _roundManager.DeleteAsync(id, userId);
-            return RedirectToAction("Index", "Round");
-        }
+        //        public async Task<IActionResult> Delete(int id)
+        //        {
+        //            var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
+        //            await _roundManager.DeleteAsync(id, userId);
+        //            return RedirectToAction("Index", "Round");
+        //        }
     }
 }
