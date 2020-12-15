@@ -587,6 +587,10 @@ body {
     cursor: pointer;
 }
 
+    .select-question-dropdown option {
+        background: #2F323A;
+    }
+
 .select-block i {
     position: absolute;
     display: block;

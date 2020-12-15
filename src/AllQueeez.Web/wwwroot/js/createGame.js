@@ -46,3 +46,9 @@ function duplicateQuestion(e) {
 function removeQuestion(e) {
     e.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode);
 }
+
+function submitAll() {
+    var roundForms = document.getElementsByClassName('round-template');
+    for (var i = 0; i < roundForms.length; i++)
+        document.forms[i].submit();
+}

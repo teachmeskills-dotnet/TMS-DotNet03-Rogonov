@@ -1,4 +1,4 @@
-﻿@model GameRoundsViewModel
+﻿@model GameContentViewModel
 
 @{
     ViewData["Title"] = "Queez Content";
@@ -47,26 +47,73 @@
         </div>
     </div>
     <div class="main-container">
-        @*<form method="post" asp-controller="Game" asp-action="AddRound" asp-route-id="@Model.Id">*@
-            <div class="title-row">
-                <span class="title">Queez contents</span>
-                <button type="submit" class="save">Save</button>
-            </div>
-            <table class="game-info">
-                <tbody>
-                    <tr>
-                        <td width="20%">Game title: <span>@Model.Title</span></td>
-                        <td width="25%">Theme: <span>@Model.ThemeName</span></td>
-                        <td width="40%">Description: <span>@Model.Description</span></td>
-                        <td width="15%">Date: <span>@Model.Date.Value.ToString("dd.MM.yyyy")</span></td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="header-row">Rounds:</div>
-            <div class="rounds">
-                @await Html.PartialAsync("_AddRoundPartial", new RoundActionsViewModel())
-            </div>
-        @*</form>*@
+        <div class="title-row">
+            <span class="title">Queez contents</span>
+            <button type="button" class="save" onclick="submitAll()">Save</button>
+        </div>
+        <table class="game-info">
+            <tbody>
+                <tr>
+                    <td width="20%">Game title: <span>@Model.Title</span></td>
+                    <td width="25%">Theme: <span>@Model.ThemeName</span></td>
+                    <td width="40%">Description: <span>@Model.Description</span></td>
+                    <td width="15%">Date: <span>@Model.Date.Value.ToString("dd.MM.yyyy")</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="header-row">Rounds:</div>
+        <div class="rounds">
+            <form class="round-template" method="post" asp-controller="Round" asp-action="Create" asp-route-id="@Model.Id">
+                <div class="round-header">
+                    <div class="round-number"></div>
+                    <div class="round-name">
+                        <input type="text"
+                               class="round-name-field"
+                               placeholder="Enter Round name"
+                               onfocus="this.placeholder=''"
+                               onblur="this.placeholder='Enter Round name'" asp-for="RoundTitle">
+                        <span class="input-alert">You should enter Round name</span>
+                    </div>
+                </div>
+                <table class="round-questions">
+                    <thead>
+                        <tr class="questions-header">
+                            <th width="5%" class="row-number">#</th>
+                            <th width="45%">Description</th>
+                            <th width="45%">Answer</th>
+                            <th width="5%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="another-question">
+                            <td width="5%" class="row-number"></td>
+                            <td width="45%" class="select-block">
+                                <select class="select-question-dropdown" asp-for="QuestionId" asp-items="ViewBag.Questions">
+                                </select>
+                                <i class="fas fa-caret-down"></i>
+                            </td>
+                            <td width="45%">Answer</td>
+                            <td width="5%" class="question-btns">
+                                <button class="add-another-question-btn" onclick="duplicateQuestion(this)" type="button">
+                                    <i class="fas fa-plus-circle fa-2x"></i>
+                                </button>
+                                <button class="remove-another-question-btn" onclick="removeQuestion(this)" type="button">
+                                    <i class="fas fa-minus-circle fa-2x"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="round-action-btns">
+                    <button type="button" class="add-another-round-btn" onclick="duplicateRound()">
+                        <i class="fas fa-plus fa-sm"></i>
+                    </button>
+                    <button type="button" class="remove-another-round-btn" onclick="removeRound(this)">
+                        <i class="fas fa-minus fa-sm"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

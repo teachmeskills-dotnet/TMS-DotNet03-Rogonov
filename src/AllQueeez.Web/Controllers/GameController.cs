@@ -83,26 +83,16 @@ namespace AllQueez.Web.Controllers
             return View(model);
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> GameContent()
-        //{
-        //    var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
-        //    var questions = (await _questionManager.GetQuestionByUserIdAsync(userId)).Select(q => new { q.Id, q.Description }).ToList();
-        //    questions.Insert(0, new { Id = 0, Description = "Question description" });
-        //    ViewBag.Questions = new SelectList(questions, "Id", "Description");
-
-        //    return View();
-        //}
-
         [HttpGet]
         public async Task<IActionResult> GameContent(int id)
         {
             var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
             var gameDto = await _gameManager.GetGameAsync(id, userId);
 
-            var gameViewModel = new GameRoundsViewModel
+            var gameViewModel = new GameContentViewModel
             {
                 Id = gameDto.Id,
+                ThemeId = gameDto.ThemeId,
                 ThemeName = gameDto.ThemeName,
                 Title = gameDto.Title,
                 Description = gameDto.Description,

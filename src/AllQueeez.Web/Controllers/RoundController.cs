@@ -47,20 +47,20 @@ namespace AllQueez.Web.Controllers
             return View(roundViewModels);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> AddRound()
-        {
-            var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
-            var questions = (await _questionManager.GetQuestionByUserIdAsync(userId)).Select(q => new { q.Id, q.Description }).ToList();
-            questions.Insert(0, new { Id = 0, Description = "Question description" });
-            ViewBag.Questions = new SelectList(questions, "Id", "Description");
+        //[HttpGet]
+        //public async Task<IActionResult> AddRound()
+        //{
+        //    var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
+        //    var questions = (await _questionManager.GetQuestionByUserIdAsync(userId)).Select(q => new { q.Id, q.Description }).ToList();
+        //    questions.Insert(0, new { Id = 0, Description = "Question description" });
+        //    ViewBag.Questions = new SelectList(questions, "Id", "Description");
 
-            return View();
-        }
+        //    return View();
+        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int id, RoundActionsViewModel model)
+        public async Task<IActionResult> Create(int id, GameContentViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -69,8 +69,8 @@ namespace AllQueez.Web.Controllers
                 var roundDto = new RoundDto
                 {
                     GameId = gameId.Id,
-                    QuestionId = model.QuestionId,
-                    Title = model.Title,
+                    //QuestionId = model.QuestionId,
+                    Title = model.RoundTitle,
                 };
 
                 await _roundManager.CreateAsync(roundDto);

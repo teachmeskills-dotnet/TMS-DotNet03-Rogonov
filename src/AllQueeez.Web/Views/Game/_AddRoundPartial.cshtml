@@ -1,53 +1,53 @@
-﻿@model RoundActionsViewModel
+﻿@*@model GameContentViewModel
 
 
-    <div class="round-template">
-        <div class="round-header">
-            <div class="round-number"></div>
-            <div class="round-name">
-                <input type="text"
-                       class="round-name-field"
-                       placeholder="Enter Round name"
-                       onfocus="this.placeholder=''"
-                       onblur="this.placeholder='Enter Round name'" asp-for="Title">
-                <span class="input-alert">You should enter Round name</span>
-            </div>
-        </div>
-        <table class="round-questions">
-            <thead>
-                <tr class="questions-header">
-                    <th width="5%" class="row-number">#</th>
-                    <th width="45%">Description</th>
-                    <th width="45%">Answer</th>
-                    <th width="5%"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="another-question">
-                    <td width="5%" class="row-number"></td>
-                    <td width="45%" class="select-block">
-                        <select class="select-question-dropdown" asp-for="QuestionId" asp-items="ViewBag.Questions">
-                        </select>
-                        <i class="fas fa-caret-down"></i>
-                    </td>
-                    <td width="45%">Answer</td>
-                    <td width="5%" class="question-btns">
-                        <button class="add-another-question-btn" onclick="duplicateQuestion(this)" type="button">
-                            <i class="fas fa-plus-circle fa-2x"></i>
-                        </button>
-                        <button class="remove-another-question-btn" onclick="removeQuestion(this)" type="button">
-                            <i class="fas fa-minus-circle fa-2x"></i>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="round-action-btns">
-            <button type="submit" class="add-another-round-btn" onclick="duplicateRound()">
-                <i class="fas fa-plus fa-sm"></i>
-            </button>
-            <button type="button" class="remove-another-round-btn" onclick="removeRound(this)">
-                <i class="fas fa-minus fa-sm"></i>
-            </button>
+<form class="round-template" method="post" asp-controller="Round" asp-action="Create" asp-route-id="@Model.Id">
+    <div class="round-header">
+        <div class="round-number"></div>
+        <div class="round-name">
+            <input type="text"
+                   class="round-name-field"
+                   placeholder="Enter Round name"
+                   onfocus="this.placeholder=''"
+                   onblur="this.placeholder='Enter Round name'" asp-for="RoundTitle">
+            <span class="input-alert">You should enter Round name</span>
         </div>
     </div>
+    <table class="round-questions">
+        <thead>
+            <tr class="questions-header">
+                <th width="5%" class="row-number">#</th>
+                <th width="45%">Description</th>
+                <th width="45%">Answer</th>
+                <th width="5%"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="another-question">
+                <td width="5%" class="row-number"></td>
+                <td width="45%" class="select-block">
+                    <select class="select-question-dropdown" asp-for="QuestionId" asp-items="ViewBag.Questions">
+                    </select>
+                    <i class="fas fa-caret-down"></i>
+                </td>
+                <td width="45%">Answer</td>
+                <td width="5%" class="question-btns">
+                    <button class="add-another-question-btn" onclick="duplicateQuestion(this)" type="button">
+                        <i class="fas fa-plus-circle fa-2x"></i>
+                    </button>
+                    <button class="remove-another-question-btn" onclick="removeQuestion(this)" type="button">
+                        <i class="fas fa-minus-circle fa-2x"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="round-action-btns">
+        <button type="button" class="add-another-round-btn" onclick="duplicateRound()">
+            <i class="fas fa-plus fa-sm"></i>
+        </button>
+        <button type="button" class="remove-another-round-btn" onclick="removeRound(this)">
+            <i class="fas fa-minus fa-sm"></i>
+        </button>
+    </div>
+</form>*@

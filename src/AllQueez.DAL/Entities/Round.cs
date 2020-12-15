@@ -25,5 +25,10 @@ namespace AllQueez.DAL.Entities
         /// Round title.
         /// </summary>
         public string Title { get; set; }
+
+        /// <summary>
+        /// Navigation to round questions.
+        /// </summary>
+        public ICollection<RoundQuestion> RoundQuestions { get; set; }
     }
 }

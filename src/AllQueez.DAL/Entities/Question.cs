@@ -48,5 +48,10 @@ namespace AllQueez.DAL.Entities
         /// Answer.
         /// </summary>
         public string Answer { get; set; }
+
+        /// <summary>
+        /// Navigation to round questions.
+        /// </summary>
+        public ICollection<RoundQuestion> RoundQuestions { get; set; }
     }
 }

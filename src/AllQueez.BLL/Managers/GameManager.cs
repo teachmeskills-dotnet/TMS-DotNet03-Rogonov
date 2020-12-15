@@ -49,6 +49,7 @@ namespace AllQueez.BLL.Managers
             {
                 Id = game.Id,
                 UserId = game.UserId,
+                ThemeId = game.ThemeId,
                 Title = game.Title,
                 Description = game.Description,
                 Date = game.Date

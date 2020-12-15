@@ -24,5 +24,10 @@
         /// Questions.
         /// </summary>
         public const string Questions = nameof(Questions);
+
+        /// <summary>
+        /// Round questions.
+        /// </summary>
+        public const string RoundQuestions = nameof(RoundQuestions);
     }
 }

@@ -20,6 +20,9 @@
         /// </summary>
         public string Title { get; set; }
 
+        /// <summary>
+        /// Question Id.
+        /// </summary>
         public int QuestionId { get; set; }
     }
 }
