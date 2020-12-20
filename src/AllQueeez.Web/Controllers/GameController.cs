@@ -100,7 +100,7 @@ namespace AllQueez.Web.Controllers
             };
 
             var questions = (await _questionManager.GetQuestionByUserIdAsync(userId)).Select(q => new { q.Id, q.Description }).ToList();
-            questions.Insert(0, new { Id = 0, Description = "Question description" });
+            questions.Insert(0, new { Id = 0, Description = "Select question" });
             ViewBag.Questions = new SelectList(questions, "Id", "Description");
 
             return View(gameViewModel);

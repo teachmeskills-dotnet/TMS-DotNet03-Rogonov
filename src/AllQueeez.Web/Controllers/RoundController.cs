@@ -1,13 +1,9 @@
 ﻿using AllQueez.BLL.Interfaces;
 using AllQueez.BLL.Models;
-using AllQueez.DAL.Context;
-using AllQueez.DAL.Entities;
 using AllQueez.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace AllQueez.Web.Controllers
@@ -18,14 +14,17 @@ namespace AllQueez.Web.Controllers
         private readonly IAccountManager _accountManager;
         private readonly IRoundManager _roundManager;
         private readonly IGameManager _gameManager;
-        private readonly IQuestionManager _questionManager;
+        private readonly IRoundQuestionManager _roundQuestionManager;
 
-        public RoundController(IAccountManager accountManager, IRoundManager roundManager, IGameManager gameManager, IQuestionManager questionManager)
+        public RoundController(IAccountManager accountManager,
+            IRoundManager roundManager,
+            IGameManager gameManager,
+            IRoundQuestionManager roundQuestionManager)
         {
             _accountManager = accountManager ?? throw new System.ArgumentNullException(nameof(accountManager));
             _roundManager = roundManager ?? throw new System.ArgumentNullException(nameof(roundManager));
             _gameManager = gameManager ?? throw new System.ArgumentNullException(nameof(gameManager));
-            _questionManager = questionManager ?? throw new System.ArgumentNullException(nameof(questionManager));
+            _roundQuestionManager = roundQuestionManager ?? throw new System.ArgumentNullException(nameof(roundQuestionManager));
         }
 
         public async Task<IActionResult> Index(int id)
@@ -47,17 +46,6 @@ namespace AllQueez.Web.Controllers
             return View(roundViewModels);
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> AddRound()
-        //{
-        //    var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
-        //    var questions = (await _questionManager.GetQuestionByUserIdAsync(userId)).Select(q => new { q.Id, q.Description }).ToList();
-        //    questions.Insert(0, new { Id = 0, Description = "Question description" });
-        //    ViewBag.Questions = new SelectList(questions, "Id", "Description");
-
-        //    return View();
-        //}
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(int id, GameContentViewModel model)
@@ -69,7 +57,6 @@ namespace AllQueez.Web.Controllers
                 var roundDto = new RoundDto
                 {
                     GameId = gameId.Id,
-                    //QuestionId = model.QuestionId,
                     Title = model.RoundTitle,
                 };
 
@@ -78,6 +65,24 @@ namespace AllQueez.Web.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddRoundQuestion([FromBody] IEnumerable<GameContentViewModel> model)
+        {
+            if (ModelState.IsValid)
+            {
+                var roundQuestionDto = new RoundQuestionDto
+                {
+                    //RoundId = model.RoundId,
+                    //QuestionId = model.QuestionId
+                };
+
+                await _roundQuestionManager.AddQuestionAsync(roundQuestionDto);
+                return View();
+            }
+
+            return View();
         }
 
         //        public async Task<IActionResult> Delete(int id)

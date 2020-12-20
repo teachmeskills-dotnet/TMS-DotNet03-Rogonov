@@ -47,14 +47,16 @@
         </div>
     </div>
     <div class="main-container">
-        <div class="title-row">
-            <span class="title">Queez contents</span>
-            <button type="button" class="save" onclick="submitAll()">Save</button>
-        </div>
+        <form method="post" asp-controller="Round" asp-action="AddRoundQuestion">
+            <div class="title-row">
+                <span class="title">Queez contents</span>
+                <button type="button" class="save" onclick="submitAll(this.parentElement.parentElement, @Model.Id)">Save</button>
+            </div>
+        </form>
         <table class="game-info">
             <tbody>
                 <tr>
-                    <td width="20%">Game title: <span>@Model.Title</span></td>
+                    <td width="20%">Queez title: <span>@Model.Title</span></td>
                     <td width="25%">Theme: <span>@Model.ThemeName</span></td>
                     <td width="40%">Description: <span>@Model.Description</span></td>
                     <td width="15%">Date: <span>@Model.Date.Value.ToString("dd.MM.yyyy")</span></td>
@@ -71,7 +73,7 @@
                                class="round-name-field"
                                placeholder="Enter Round name"
                                onfocus="this.placeholder=''"
-                               onblur="this.placeholder='Enter Round name'" asp-for="RoundTitle">
+                               onblur="this.placeholder='Enter Round name'">
                         <span class="input-alert">You should enter Round name</span>
                     </div>
                 </div>
@@ -79,7 +81,7 @@
                     <thead>
                         <tr class="questions-header">
                             <th width="5%" class="row-number">#</th>
-                            <th width="45%">Description</th>
+                            <th width="45%">Question</th>
                             <th width="45%">Answer</th>
                             <th width="5%"></th>
                         </tr>
