@@ -24,10 +24,5 @@
         /// Question.
         /// </summary>
         public const string Question = "question";
-
-        /// <summary>
-        /// Round question.
-        /// </summary>
-        public const string RoundQuestion = "roundQuestion";
     }
 }

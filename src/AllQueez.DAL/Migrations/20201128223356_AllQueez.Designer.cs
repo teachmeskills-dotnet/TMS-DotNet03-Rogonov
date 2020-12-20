@@ -4,14 +4,16 @@ using AllQueez.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AllQueez.DAL.Migrations
 {
     [DbContext(typeof(AllQueezContext))]
-    partial class AllQueezContextModelSnapshot : ModelSnapshot
+    [Migration("20201128223356_AllQueez")]
+    partial class AllQueez
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,28 +118,6 @@ namespace AllQueez.DAL.Migrations
                     b.HasIndex("GameId");
 
                     b.ToTable("Rounds", "round");
-                });
-
-            modelBuilder.Entity("AllQueez.DAL.Entities.RoundQuestion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoundId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("QuestionId");
-
-                    b.HasIndex("RoundId");
-
-                    b.ToTable("RoundQuestions", "round");
                 });
 
             modelBuilder.Entity("AllQueez.DAL.Entities.Theme", b =>
@@ -391,29 +371,10 @@ namespace AllQueez.DAL.Migrations
                     b.HasOne("AllQueez.DAL.Entities.Game", "Game")
                         .WithMany("Rounds")
                         .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Game");
-                });
-
-            modelBuilder.Entity("AllQueez.DAL.Entities.RoundQuestion", b =>
-                {
-                    b.HasOne("AllQueez.DAL.Entities.Question", "Question")
-                        .WithMany("RoundQuestions")
-                        .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("AllQueez.DAL.Entities.Round", "Round")
-                        .WithMany("RoundQuestions")
-                        .HasForeignKey("RoundId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Question");
-
-                    b.Navigation("Round");
+                    b.Navigation("Game");
                 });
 
             modelBuilder.Entity("AllQueez.DAL.Entities.Theme", b =>
@@ -480,16 +441,6 @@ namespace AllQueez.DAL.Migrations
             modelBuilder.Entity("AllQueez.DAL.Entities.Game", b =>
                 {
                     b.Navigation("Rounds");
-                });
-
-            modelBuilder.Entity("AllQueez.DAL.Entities.Question", b =>
-                {
-                    b.Navigation("RoundQuestions");
-                });
-
-            modelBuilder.Entity("AllQueez.DAL.Entities.Round", b =>
-                {
-                    b.Navigation("RoundQuestions");
                 });
 
             modelBuilder.Entity("AllQueez.DAL.Entities.Theme", b =>

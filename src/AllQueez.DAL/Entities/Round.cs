@@ -6,18 +6,10 @@ namespace AllQueez.DAL.Entities
     /// <summary>
     /// Rounds.
     /// </summary>
-    public class Round : IHasDbIdentity, IHasUserIdentity
+    public class Round : IHasDbIdentity
     {
         /// <inheritdoc/>
         public int Id { get; set; }
-
-        /// <inheritdoc/>
-        public string UserId { get; set; }
-
-        /// <summary>
-        /// Navigation to User.
-        /// </summary>
-        public User User { get; set; }
 
         /// <summary>
         /// Game id.
@@ -35,8 +27,8 @@ namespace AllQueez.DAL.Entities
         public string Title { get; set; }
 
         /// <summary>
-        /// Round type.
+        /// Navigation to round questions.
         /// </summary>
-        public string Type { get; set; }
+        public ICollection<RoundQuestion> RoundQuestions { get; set; }
     }
 }

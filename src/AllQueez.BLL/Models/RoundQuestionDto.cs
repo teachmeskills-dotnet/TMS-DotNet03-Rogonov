@@ -1,27 +1,22 @@
 ﻿namespace AllQueez.BLL.Models
 {
     /// <summary>
-    /// Round data tansfer object.
+    /// RoundQuestion data transfer object.
     /// </summary>
-    public class RoundDto
+    public class RoundQuestionDto
     {
         /// <summary>
-        /// Identifier.
+        /// RoundQuestion identifier.
         /// </summary>
         public int Id { get; set; }
 
         /// <summary>
-        /// Game id.
+        /// Round identifier.
         /// </summary>
-        public int GameId { get; set; }
+        public int RoundId { get; set; }
 
         /// <summary>
-        /// Round title.
-        /// </summary>
-        public string Title { get; set; }
-
-        /// <summary>
-        /// Question Id.
+        /// Question identifier.
         /// </summary>
         public int QuestionId { get; set; }
     }

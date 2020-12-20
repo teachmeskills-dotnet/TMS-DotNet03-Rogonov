@@ -10,23 +10,23 @@ namespace AllQueez.BLL.Interfaces
     public interface IRoundManager
     {
         /// <summary>
-        /// Create round by user identifier.
+        /// Create round by game identifier.
         /// </summary>
         /// <param name="roundDto">Round data transfer object.</param>
         Task CreateAsync(RoundDto roundDto);
 
         /// <summary>
-        /// Get round by user identifier.
+        /// Get round by game identifier.
         /// </summary>
-        /// <param name="userId">User identifier.</param>
+        /// <param name="userId">Game identifier.</param>
         /// <returns>Round.</returns>
-        Task<IEnumerable<RoundDto>> GetRoundByUserIdAsync(string userId);
+        Task<IEnumerable<RoundDto>> GetRoundByGameIdAsync(int gameId);
 
         /// <summary>
-        /// Delete round by user and round identifiers.
+        /// Delete round by game and round identifiers.
         /// </summary>
         /// <param name="id">Round identifier.</param>
-        /// <param name="userId">User identifier..</param>
-        Task DeleteAsync(int id, string userId);
+        /// <param name="userId">Game identifier.</param>
+        Task DeleteAsync(int id, int gameId);
     }
 }

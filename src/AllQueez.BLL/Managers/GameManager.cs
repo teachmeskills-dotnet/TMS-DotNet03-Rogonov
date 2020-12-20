@@ -35,6 +35,29 @@ namespace AllQueez.BLL.Managers
             await _repositoryGame.SaveChangesAsync();
         }
 
+        public async Task<GameDto> GetGameAsync(int id, string userId)
+        {
+            var game = await _repositoryGame
+                .GetEntityWithoutTrackingAsync(game => game.Id == id && game.UserId == userId);
+
+            if (game is null)
+            {
+                throw new KeyNotFoundException();
+            }
+
+            var gameDto = new GameDto
+            {
+                Id = game.Id,
+                UserId = game.UserId,
+                ThemeId = game.ThemeId,
+                Title = game.Title,
+                Description = game.Description,
+                Date = game.Date
+            };
+
+            return gameDto;
+        }
+
         public async Task<IEnumerable<GameDto>> GetGameByUserIdAsync(string userId)
         {
             var gameDtos = new List<GameDto>();
@@ -65,6 +88,12 @@ namespace AllQueez.BLL.Managers
             }
 
             return gameDtos;
+        }
+
+        public async Task<int> GetGameIdByUserIdAsync(string userId)
+        {
+            var game = await _repositoryGame.GetEntityAsync(game => game.UserId == userId);
+            return game.Id;
         }
 
         public async Task DeleteAsync(int id, string userId)

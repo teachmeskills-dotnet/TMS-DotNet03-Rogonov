@@ -32,6 +32,7 @@ namespace AllQueez.Web
             services.AddScoped<IGameManager, GameManager>();
             services.AddScoped<IRoundManager, RoundManager>();
             services.AddScoped<IQuestionManager, QuestionManager>();
+            services.AddScoped<IRoundQuestionManager, RoundQuestionManager>();
 
             // Database context
             services.AddDbContext<AllQueezContext>(options =>

@@ -1,11 +1,8 @@
 ﻿using AllQueez.BLL.Interfaces;
 using AllQueez.BLL.Models;
-using AllQueez.DAL.Context;
-using AllQueez.DAL.Entities;
 using AllQueez.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -16,19 +13,25 @@ namespace AllQueez.Web.Controllers
     {
         private readonly IAccountManager _accountManager;
         private readonly IRoundManager _roundManager;
-        private readonly AllQueezContext _allQueezContext;
+        private readonly IGameManager _gameManager;
+        private readonly IRoundQuestionManager _roundQuestionManager;
 
-        public RoundController(IAccountManager accountManager, IRoundManager roundManager, AllQueezContext allQueezContext)
+        public RoundController(IAccountManager accountManager,
+            IRoundManager roundManager,
+            IGameManager gameManager,
+            IRoundQuestionManager roundQuestionManager)
         {
             _accountManager = accountManager ?? throw new System.ArgumentNullException(nameof(accountManager));
             _roundManager = roundManager ?? throw new System.ArgumentNullException(nameof(roundManager));
-            _allQueezContext = allQueezContext ?? throw new System.ArgumentNullException(nameof(allQueezContext));        
+            _gameManager = gameManager ?? throw new System.ArgumentNullException(nameof(gameManager));
+            _roundQuestionManager = roundQuestionManager ?? throw new System.ArgumentNullException(nameof(roundQuestionManager));
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
         {
             var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
-            var roundDtos = await _roundManager.GetRoundByUserIdAsync(userId);
+            var gameId = await _gameManager.GetGameAsync(id, userId);
+            var roundDtos = await _roundManager.GetRoundByGameIdAsync(gameId.Id);
 
             var roundViewModels = new List<RoundsViewModel>();
             foreach (var roundDto in roundDtos)
@@ -36,48 +39,57 @@ namespace AllQueez.Web.Controllers
                 roundViewModels.Add(new RoundsViewModel
                 {
                     Id = roundDto.Id,
-                    GameId = roundDto.GameId,
-                    Title = roundDto.Title,
-                    Type = roundDto.Type
+                    Title = roundDto.Title
                 });
             }
 
             return View(roundViewModels);
         }
 
-        [HttpGet]
-        public IActionResult Create()
-        {
-            return View();
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(RoundActionsViewModel model)
+        public async Task<IActionResult> Create(int id, GameContentViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
+                var gameId = await _gameManager.GetGameAsync(id, userId);
                 var roundDto = new RoundDto
                 {
-                    UserId = userId,
-                    GameId = model.GameId,
-                    Title = model.Title,
-                    Type = model.Type
+                    GameId = gameId.Id,
+                    Title = model.RoundTitle,
                 };
 
                 await _roundManager.CreateAsync(roundDto);
-                return RedirectToAction("Index", "Round");
+                return Redirect($"/game/gameContent/{id}");
             }
 
             return View(model);
         }
 
-        public async Task<IActionResult> Delete(int id)
+        [HttpPost]
+        public async Task<IActionResult> AddRoundQuestion([FromBody] IEnumerable<GameContentViewModel> model)
         {
-            var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
-            await _roundManager.DeleteAsync(id, userId);
-            return RedirectToAction("Index", "Round");
+            if (ModelState.IsValid)
+            {
+                var roundQuestionDto = new RoundQuestionDto
+                {
+                    //RoundId = model.RoundId,
+                    //QuestionId = model.QuestionId
+                };
+
+                await _roundQuestionManager.AddQuestionAsync(roundQuestionDto);
+                return View();
+            }
+
+            return View();
         }
+
+        //        public async Task<IActionResult> Delete(int id)
+        //        {
+        //            var userId = await _accountManager.GetUserIdByNameAsync(User.Identity.Name);
+        //            await _roundManager.DeleteAsync(id, userId);
+        //            return RedirectToAction("Index", "Round");
+        //        }
     }
 }

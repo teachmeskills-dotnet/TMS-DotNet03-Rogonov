@@ -24,23 +24,21 @@ namespace AllQueez.BLL.Managers
             var round = new Round
             {
                 Id = roundDto.Id,
-                UserId = roundDto.UserId,
                 GameId = roundDto.GameId,
                 Title = roundDto.Title,
-                Type = roundDto.Type,
             };
 
             await _repositoryRound.CreateAsync(round);
             await _repositoryRound.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<RoundDto>> GetRoundByUserIdAsync(string userId)
+        public async Task<IEnumerable<RoundDto>> GetRoundByGameIdAsync(int gameId)
         {
             var roundDtos = new List<RoundDto>();
             var rounds = await _repositoryRound
                 .GetAll()
                 .AsNoTracking()
-                .Where(round => round.UserId == userId)
+                .Where(round => round.GameId == gameId)
                 .ToListAsync();
 
             if (!rounds.Any())
@@ -53,19 +51,17 @@ namespace AllQueez.BLL.Managers
                 roundDtos.Add(new RoundDto
                 {
                     Id = round.Id,
-                    UserId = round.UserId,
                     GameId = round.GameId,
                     Title = round.Title,
-                    Type = round.Type
                 });
             }
 
             return roundDtos;
         }
 
-        public async Task DeleteAsync(int id, string userId)
+        public async Task DeleteAsync(int id, int gameId)
         {
-            var round = await _repositoryRound.GetEntityAsync(round => round.Id == id && round.UserId == userId);
+            var round = await _repositoryRound.GetEntityAsync(round => round.Id == id && round.GameId == gameId);
             // TODO: checks and confirmation
 
             if (round is null)

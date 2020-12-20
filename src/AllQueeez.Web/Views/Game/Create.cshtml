@@ -47,54 +47,56 @@
         </div>
     </div>
     <div class="main-container">
-        <form method="post" asp-controller="Game" asp-action="Create">
-            <div class="title-row">
-                <span class="title">Add queez</span>
-                <button type="submit" class="save">Save</button>
-            </div>
-            <div class="content">
-                <div class="create-form">
-                    <div class="form-row">
-                        <label for="theme" class="field-title">Select theme or create a new one:</label>
-                        <div class="select-container">
-                            <div class="select-block">
-                                <select class="select" asp-for="ThemeId" asp-items="ViewBag.Themes"></select>
-                                <i class="fas fa-caret-down"></i>
+        <div class="top-block">
+            <form method="post" asp-controller="Game" asp-action="Create">
+                <div class="title-row">
+                    <span class="title">Add queez</span>
+                    <button type="submit" class="save">Save</button>
+                </div>
+                <div class="content">
+                    <div class="create-form">
+                        <div class="form-row">
+                            <label for="theme" class="field-title">Select theme or create a new one:</label>
+                            <div class="select-container">
+                                <div class="select-block">
+                                    <select class="select" asp-for="ThemeId" asp-items="ViewBag.Themes"></select>
+                                    <i class="fas fa-caret-down"></i>
+                                </div>
+                                <button onclick="addTheme()" type="button" class="add-new-theme-btn" data-toggle="modal">
+                                    <i class="fas fa-plus-circle fa-2x"></i>
+                                </button>
                             </div>
-                            <button onclick="addTheme()" type="button" class="add-new-theme-btn" data-toggle="modal">
-                                <i class="fas fa-plus-circle fa-2x"></i>
-                            </button>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <label class="field-title">Game title:</label>
-                        <div>
-                            <input class="field"
-                                   placeholder="Game title"
-                                   onfocus="this.placeholder = ''"
-                                   onblur="this.placeholder = 'Game title'" asp-for="Title">
+                        <div class="form-row">
+                            <label class="field-title">Game title:</label>
+                            <div>
+                                <input class="field"
+                                       placeholder="Game title"
+                                       onfocus="this.placeholder = ''"
+                                       onblur="this.placeholder = 'Game title'" asp-for="Title">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <label class="field-title">Description:</label>
-                        <div>
-                            <input class="field"
-                                   placeholder="Description"
-                                   onfocus="this.placeholder = ''"
-                                   onblur="this.placeholder = 'Description'" asp-for="Description">
+                        <div class="form-row">
+                            <label class="field-title">Description:</label>
+                            <div>
+                                <input class="field"
+                                       placeholder="Description"
+                                       onfocus="this.placeholder = ''"
+                                       onblur="this.placeholder = 'Description'" asp-for="Description">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <label for="game-date" class="field-title">Game date:</label>
-                        <div class="date">
-                            <input class="field" placeholder="Select date" onfocus="(this.type='date')" onblur="(this.type='text')" asp-for="Date">
+                        <div class="form-row">
+                            <label for="game-date" class="field-title">Game date:</label>
+                            <div class="date">
+                                <input class="field" placeholder="Select date" onfocus="(this.type='date')" onblur="(this.type='text')" asp-for="Date">
+                            </div>
                         </div>
                     </div>
                 </div>
+            </form>
+            <div>
+                @await Html.PartialAsync("_AddThemePartial")
             </div>
-        </form>
-        <div>
-            @await Html.PartialAsync("_AddThemePartial")
         </div>
     </div>
 </div>
@@ -104,5 +106,5 @@
 }
 
 @section js {
-    <script src="~/js/create.js"></script>
+    <script src="~/js/createGame.js"></script>
 }

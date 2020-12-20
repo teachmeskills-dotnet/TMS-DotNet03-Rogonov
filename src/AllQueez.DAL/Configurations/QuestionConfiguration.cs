@@ -43,6 +43,11 @@ namespace AllQueez.DAL.Configurations
                 .WithMany(user => user.Questions)
                 .HasForeignKey(question => question.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(question => question.RoundQuestions)
+                .WithOne(roundQuestion => roundQuestion.Question)
+                .HasForeignKey(roundQuestion => roundQuestion.QuestionId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

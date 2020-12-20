@@ -22,20 +22,15 @@ namespace AllQueez.DAL.Configurations
             builder.Property(round => round.Title)
                 .IsRequired()
                 .HasMaxLength(ConfigurationConstants.SqlMaxLengthMedium);
-
-            builder.Property(round => round.Type)
-                .IsRequired()
-                .HasMaxLength(ConfigurationConstants.SqlMaxLengthMedium);
-
-            builder.HasOne(round => round.User)
-                .WithMany(user => user.Rounds)
-                .HasForeignKey(round => round.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
-
+            
             builder.HasOne(round => round.Game)
                 .WithMany(game => game.Rounds)
                 .HasForeignKey(round => round.GameId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasMany(round => round.RoundQuestions)
+                .WithOne(roundQuestion => roundQuestion.Round)
+                .HasForeignKey(roundQuestion => roundQuestion.RoundId);
         }
     }
 }
