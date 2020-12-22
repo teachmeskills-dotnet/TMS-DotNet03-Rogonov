@@ -1,0 +1,27 @@
+﻿@model ThemeActionsViewModel
+
+<form method="post" asp-controller="Theme" asp-action="CreateFromGame">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div id="add-theme-modal" class="add-theme-modal">
+        <div class="modal-content">
+            <div class="modal-title">Add new theme</div>
+            <div class="theme-title-field-row">
+                <div class="theme-title-field-title">Theme title:</div>
+                <input type="text" class="theme-title-field" placeholder="Theme title"
+                       onfocus="this.placeholder=''" onblur="this.placeholder='Theme title'" asp-for="Name">
+            </div>
+            <div class="buttons-row">
+                <div class="theme-save-button">
+                    <button type="submit" class="btn">Add</button>
+                </div>
+                <div class="close-modal-button">
+                    <button onclick="closeForm()" type="button" class="btn">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section css {
+    <link href="~/css/createGame.css" rel="stylesheet" />
+}

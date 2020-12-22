@@ -1,0 +1,56 @@
+﻿@model RegisterViewModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<form method="post" asp-controller="Account" asp-action="Register">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="title"><a href="login">All<span>Queez</span></a></div>
+    <div class="background">
+        <div class="register-box">
+            <h1>Register</h1>
+            <div class="textbox">
+                <i class="fas fa-at"></i>
+                <input type="text"
+                       placeholder="Email"
+                       onfocus="this.placeholder = ''"
+                       onblur="this.placeholder = 'Email'" asp-for="Email" />
+                <span asp-validation-for="Email"></span>
+            </div>
+            <div class="textbox">
+                <i class="fas fa-user"></i>
+                <input type="text"
+                       placeholder="Username"
+                       onfocus="this.placeholder = ''"
+                       onblur="this.placeholder = 'Username'" asp-for="Username" />
+                <span asp-validation-for="Username"></span>
+            </div>
+            <div class="textbox">
+                <i class="fas fa-lock"></i>
+                <input type="password"
+                       placeholder="Password"
+                       onfocus="this.placeholder = ''"
+                       onblur="this.placeholder = 'Password'" asp-for="Password" />
+                <span asp-validation-for="Password"></span>
+            </div>
+            <div class="textbox">
+                <i class="fas fa-lock"></i>
+                <input type="password"
+                       placeholder="Confirm password"
+                       onfocus="this.placeholder = ''"
+                       onblur="this.placeholder = 'Confirm password'" asp-for="PasswordConfirm" />
+                <span asp-validation-for="PasswordConfirm"></span>
+            </div>
+            <input class="btn" type="submit" value="Register" />
+            <div class="register">
+                <label for="register">Already have an account?</label>
+                <span><a href="login">Login.</a></span>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section css {
+    <link href="~/css/register.css" rel="stylesheet" />
+}
