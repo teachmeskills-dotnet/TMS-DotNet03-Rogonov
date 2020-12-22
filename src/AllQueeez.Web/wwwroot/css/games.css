@@ -237,7 +237,7 @@ body {
 
 .tiles {
     position: relative;
-    margin-top: 10px;    
+    margin-top: 10px;
     width: 100%;
     height: calc(100% - 160px);
     overflow-y: scroll;
@@ -301,10 +301,10 @@ body {
     top: 50px;
 }
 
-    .tile-menu-content a {        
+    .tile-menu-content a {
         color: #ffffff;
         padding: 12px 16px;
-        text-decoration: none;        
+        text-decoration: none;
         display: block;
     }
 
@@ -317,148 +317,148 @@ body {
     display: block;
 }
 
-        .tiles .tile .tile-title {
+.tiles .tile .tile-title {
+    position: absolute;
+    width: calc(100% - 20px);
+    height: calc(100% - 90%);
+    color: #ffffff;
+    font-size: 35px;
+    top: 35px;
+    text-align: center;
+    left: 10px;
+}
+
+.tiles .tile .tile-description {
+    position: absolute;
+    width: calc(100% - 20px);
+    height: calc(100% - 80%);
+    color: #ffffff;
+    font-size: 20px;
+    top: 90px;
+    left: 10px;
+    text-align: center;
+}
+
+.tiles .tile .contents-bar {
+    position: absolute;
+    width: calc(100% - 20px);
+    height: calc(100% - 60%);
+    color: #ffffff;
+    font-size: 20px;
+    top: 170px;
+    left: 10px;
+}
+
+    .tiles .tile .contents-bar .rounds {
+        position: relative;
+        display: inline-block;
+        width: calc(100% / 3);
+        height: 100%;
+        transition: 0.3s;
+        transition-property: color;
+    }
+
+        .tiles .tile .contents-bar .rounds:hover {
+            color: #cd42e9;
+        }
+
+        .tiles .tile .contents-bar .rounds i {
             position: absolute;
-            width: calc(100% - 20px);
-            height: calc(100% - 90%);
-            color: #ffffff;
-            font-size: 35px;
-            top: 35px;
+            width: 100%;
+            height: 100%;
             text-align: center;
-            left: 10px;
+            top: 27px;
         }
 
-        .tiles .tile .tile-description {
+        .tiles .tile .contents-bar .rounds p {
             position: absolute;
-            width: calc(100% - 20px);
-            height: calc(100% - 80%);
-            color: #ffffff;
-            font-size: 20px;
-            top: 90px;
-            left: 10px;
+            margin-top: 115px;
+            display: block;
+            width: 100%;
             text-align: center;
-        }
-
-        .tiles .tile .contents-bar {
-            position: absolute;
-            width: calc(100% - 20px);
-            height: calc(100% - 60%);
-            color: #ffffff;
             font-size: 20px;
-            top: 170px;
-            left: 10px;
+            font-family: 'Roboto', sans-serif;
         }
 
-            .tiles .tile .contents-bar .rounds {
-                position: relative;
-                display: inline-block;
-                width: calc(100% / 3);
-                height: 100%;
-                transition: 0.3s;
-                transition-property: color;
-            }
+    .tiles .tile .contents-bar .questions {
+        position: relative;
+        display: inline-block;
+        width: calc(100% / 3);
+        height: 100%;
+        margin-left: -5px;
+        transition: 0.3s;
+        transition-property: color;
+    }
 
-                .tiles .tile .contents-bar .rounds:hover {
-                    color: #cd42e9;
-                }
+        .tiles .tile .contents-bar .questions:hover {
+            color: #cd42e9;
+        }
 
-                .tiles .tile .contents-bar .rounds i {
-                    position: absolute;
-                    width: 100%;
-                    height: 100%;
-                    text-align: center;
-                    top: 27px;
-                }
-
-                .tiles .tile .contents-bar .rounds p {
-                    position: absolute;
-                    margin-top: 115px;
-                    display: block;
-                    width: 100%;
-                    text-align: center;
-                    font-size: 20px;
-                    font-family: 'Roboto', sans-serif;
-                }
-
-            .tiles .tile .contents-bar .questions {
-                position: relative;
-                display: inline-block;
-                width: calc(100% / 3);
-                height: 100%;
-                margin-left: -5px;
-                transition: 0.3s;
-                transition-property: color;
-            }
-
-                .tiles .tile .contents-bar .questions:hover {
-                    color: #cd42e9;
-                }
-
-                .tiles .tile .contents-bar .questions i {
-                    position: absolute;
-                    width: 100%;
-                    height: 100%;
-                    text-align: center;
-                    top: 17px;
-                }
-
-                .tiles .tile .contents-bar .questions p {
-                    position: absolute;
-                    margin-top: 120px;
-                    display: block;
-                    width: 100%;
-                    text-align: center;
-                    font-size: 25px;
-                    font-family: 'Roboto', sans-serif;
-                }
-
-            .tiles .tile .contents-bar .timer {
-                position: relative;
-                display: inline-block;
-                width: calc(100% / 3);
-                height: 100%;
-                margin-left: -6px;
-                margin-right: -5px;
-                transition: 0.3s;
-                transition-property: color;
-            }
-
-                .tiles .tile .contents-bar .timer:hover {
-                    color: #cd42e9;
-                }
-
-                .tiles .tile .contents-bar .timer i {
-                    position: absolute;
-                    width: 100%;
-                    height: 100%;
-                    text-align: center;
-                    top: 40px;
-                }
-
-                .tiles .tile .contents-bar .timer p {
-                    position: absolute;
-                    margin-top: 110px;
-                    display: block;
-                    width: 100%;
-                    text-align: center;
-                    font-size: 17px;
-                    font-family: 'Roboto', sans-serif;
-                }
-
-        .tiles .tile .tile-date {
+        .tiles .tile .contents-bar .questions i {
             position: absolute;
-            width: calc(100% - 20px);
-            height: calc(100% - 90%);
-            color: #ffffff;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            top: 17px;
+        }
+
+        .tiles .tile .contents-bar .questions p {
+            position: absolute;
+            margin-top: 120px;
+            display: block;
+            width: 100%;
+            text-align: center;
+            font-size: 25px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+    .tiles .tile .contents-bar .timer {
+        position: relative;
+        display: inline-block;
+        width: calc(100% / 3);
+        height: 100%;
+        margin-left: -6px;
+        margin-right: -5px;
+        transition: 0.3s;
+        transition-property: color;
+    }
+
+        .tiles .tile .contents-bar .timer:hover {
+            color: #cd42e9;
+        }
+
+        .tiles .tile .contents-bar .timer i {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            top: 40px;
+        }
+
+        .tiles .tile .contents-bar .timer p {
+            position: absolute;
+            margin-top: 110px;
+            display: block;
+            width: 100%;
+            text-align: center;
             font-size: 17px;
-            font-weight: 500;
-            padding-top: 10px;
-            padding-right: 30px;
-            bottom: 10px;
-            right: 10px;
-            text-align: right;
+            font-family: 'Roboto', sans-serif;
         }
 
-            .tiles .tile .tile-date i {
-                margin-right: 10px;
-            }
+.tiles .tile .tile-date {
+    position: absolute;
+    width: calc(100% - 20px);
+    height: calc(100% - 90%);
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 500;
+    padding-top: 10px;
+    padding-right: 30px;
+    bottom: 10px;
+    right: 10px;
+    text-align: right;
+}
+
+    .tiles .tile .tile-date i {
+        margin-right: 10px;
+    }

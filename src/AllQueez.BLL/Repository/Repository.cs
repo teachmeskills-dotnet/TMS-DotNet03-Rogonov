@@ -60,7 +60,7 @@ namespace AllQueez.BLL.Repository
         {
             _dbSet.RemoveRange(entity);
         }
-                        
+
         public Task SaveChangesAsync()
         {
             return _context.SaveChangesAsync();

@@ -44,7 +44,7 @@ namespace AllQueez.Web.Controllers
                     Username = model.Username,
                     Password = model.Password
                 };
-                
+
                 var result = await _accountManager.SignUpAsync(userDto);
                 if (result.Succeeded)
                 {

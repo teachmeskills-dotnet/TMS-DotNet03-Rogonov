@@ -67,7 +67,6 @@ async function submitAll(form, gameId) {
         let roundTitle = element.querySelector(".round-name-field").value;
         const questionBlock = element.querySelectorAll(".select-question-dropdown");
         questionBlock.forEach(element => {
-
             const roundObject = {
                 RoundId: roundTitle,
                 QuestionId: element.value

@@ -12,6 +12,7 @@ namespace AllQueez.BLL.Managers
     public class AccountManager : IAccountManager
     {
         private readonly UserManager<User> _userManager;
+
         public AccountManager(UserManager<User> userManager)
         {
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));

@@ -22,7 +22,7 @@ namespace AllQueez.DAL.Configurations
             builder.Property(round => round.Title)
                 .IsRequired()
                 .HasMaxLength(ConfigurationConstants.SqlMaxLengthMedium);
-            
+
             builder.HasOne(round => round.Game)
                 .WithMany(game => game.Rounds)
                 .HasForeignKey(round => round.GameId)

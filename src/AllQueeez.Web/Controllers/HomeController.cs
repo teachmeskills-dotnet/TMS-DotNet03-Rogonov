@@ -7,8 +7,8 @@ namespace AllQueez.Web.Controllers
     {
         public IActionResult Index()
         {
-            return User.Identity.IsAuthenticated 
-                ? RedirectToAction(nameof(App)) 
+            return User.Identity.IsAuthenticated
+                ? RedirectToAction(nameof(App))
                 : (IActionResult)RedirectPermanent("/account/login");
         }
 

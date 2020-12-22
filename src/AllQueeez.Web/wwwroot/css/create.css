@@ -304,9 +304,9 @@ body {
     transition-property: color;
 }
 
-.add-new-theme-btn:hover {
-    color: #cd42e9;
-}
+    .add-new-theme-btn:hover {
+        color: #cd42e9;
+    }
 
 .add-theme-modal {
     z-index: 1;
@@ -364,7 +364,7 @@ body {
     margin-right: 10px;
 }
 
-.theme-title-field {    
+.theme-title-field {
     width: 205px;
     height: 30px;
     background: none;
@@ -480,9 +480,9 @@ body {
     margin-right: 15px;
 }
 
-    .round-number:before {
-        content: "Round " counter(roundNumber) ".";
-    }
+.round-number:before {
+    content: "Round " counter(roundNumber) ".";
+}
 
 .round-name-field {
     width: 100%;

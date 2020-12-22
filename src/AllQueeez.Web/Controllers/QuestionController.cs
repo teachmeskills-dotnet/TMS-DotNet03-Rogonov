@@ -45,7 +45,7 @@ namespace AllQueez.Web.Controllers
 
         [HttpGet]
         public IActionResult Create()
-        {            
+        {
             return View();
         }
 
